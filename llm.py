@@ -1,10 +1,15 @@
-import subprocess
+import os
+import anthropic
+from dotenv import load_dotenv
 
-# hacky claude code cli call before buying api
+load_dotenv()
+
+_client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_KEY"))
+
 def send_message(prompt: str) -> str:
-    result = subprocess.run(
-        ["claude", "-p", prompt],
-        capture_output=True,
-        text=True,
+    message = _client.messages.create(
+        model="claude-haiku-4-5",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": prompt}],
     )
-    return result.stdout.strip()
+    return message.content[0].text
