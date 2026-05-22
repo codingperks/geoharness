@@ -88,7 +88,7 @@ class Agent:
         
     def observe(self, observation: str) -> str:
         print(f"\n[observe] input: {observation}")
-        response = send_message(self.observe_prompt.format(task=self.task, history="\n".join(self.history), observation=observation))
+        response = send_message(self.observe_prompt.format(task=self.task, history="\n".join(self.history), observation=observation), name="observe")
         print(f"[observe] response: {response}")
         self.history.append(f"Observation: {observation}")
         self.history.append(f"Observation Summary: {response}")
@@ -122,7 +122,7 @@ class Agent:
         if self.task == "":
             self.task = message
         tool_descriptions = "\n".join(f"- {name}: {desc}" for name, (_, desc) in self.tool_registry.items())
-        raw = send_message(self.act_prompt.format(task=self.task, history="\n".join(self.history), tools=tool_descriptions))
+        raw = send_message(self.act_prompt.format(task=self.task, history="\n".join(self.history), tools=tool_descriptions), name="act")
         print(f"[act] response: {raw}")
         self.history.append(f"User: {message}")
         self.history.append(f"Agent: {raw}")
@@ -130,7 +130,7 @@ class Agent:
 
     def reflect(self) -> str:
         print(f"\n[reflect]")
-        response = send_message(self.reflect_prompt.format(task=self.task, history="\n".join(self.history)))
+        response = send_message(self.reflect_prompt.format(task=self.task, history="\n".join(self.history)), name="reflect")
         print(f"[reflect] response: {response}")
         self.history.append(f"Reflection: {response}")
         return response
@@ -146,7 +146,7 @@ class Agent:
 
     def output(self) -> tuple[str, bool]:
         print(f"\n[output] task: {self.task}")
-        response = send_message(self.output_prompt.format(task=self.task, history="\n".join(self.history)))
+        response = send_message(self.output_prompt.format(task=self.task, history="\n".join(self.history)), name="output")
         print(f"[output] response: {response}")
         self.history.append(f"Final Output: {response}")
         return response, "yes" in response.lower()

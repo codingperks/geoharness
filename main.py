@@ -1,5 +1,6 @@
 import sys
 from agent import Agent
+from langfuse import get_client
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -8,20 +9,24 @@ if __name__ == "__main__":
 
     task = sys.argv[1]
     agent = Agent("GeoHarness Agent")
+    langfuse = get_client()
 
-    while True:
-        response = agent.act(task)
+    with langfuse.start_as_current_observation(name="Geoharness react", as_type="span"):
+        while True:
+            response = agent.act(task)
 
-        if response.tool_call:
-            tool_result = agent.call_tool(response.tool_call, response.tool_args)
-            print(f"Tool Response: {tool_result}")
-            agent.observe(tool_result)
-        else:
-            agent.observe(response.thought or "")
+            if response.tool_call:
+                tool_result = agent.call_tool(response.tool_call, response.tool_args)
+                print(f"Tool Response: {tool_result}")
+                agent.observe(tool_result)
+            else:
+                agent.observe(response.thought or "")
 
-        reflection = agent.reflect()
+            reflection = agent.reflect()
 
-        if "yes" in reflection.lower():
-            final_output, _ = agent.output()
-            print(f"Final Output: {final_output}")
-            break
+            if "yes" in reflection.lower():
+                final_output, _ = agent.output()
+                print(f"Final Output: {final_output}")
+                break
+
+    langfuse.flush()
