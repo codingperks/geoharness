@@ -10,6 +10,7 @@ class Agent:
     
     def __init__(self, name: str):
         self.name: str = name
+        self.task: str = ""
         self.act_prompt: str = """
             You are a helpful assistant who can perform any task.
             You will be responsible for calling tools, observing results, deciding if you have completed the task, and then outputting a final status message.
@@ -87,7 +88,7 @@ class Agent:
         
     def observe(self, observation: str) -> str:
         print(f"\n[observe] input: {observation}")
-        response = send_message(self.observe_prompt.format(task="", history="\n".join(self.history), observation=observation))
+        response = send_message(self.observe_prompt.format(task=self.task, history="\n".join(self.history), observation=observation))
         print(f"[observe] response: {response}")
         self.history.append(f"Observation: {observation}")
         self.history.append(f"Observation Summary: {response}")
@@ -118,8 +119,10 @@ class Agent:
 
     def act(self, message: str) -> AgentResponse:
         print(f"\n[act] task: {message}")
+        if self.task == "":
+            self.task = message
         tool_descriptions = "\n".join(f"- {name}: {desc}" for name, (_, desc) in self.tool_registry.items())
-        raw = send_message(self.act_prompt.format(task=message, history="\n".join(self.history), tools=tool_descriptions))
+        raw = send_message(self.act_prompt.format(task=self.task, history="\n".join(self.history), tools=tool_descriptions))
         print(f"[act] response: {raw}")
         self.history.append(f"User: {message}")
         self.history.append(f"Agent: {raw}")
@@ -127,7 +130,7 @@ class Agent:
 
     def reflect(self) -> str:
         print(f"\n[reflect]")
-        response = send_message(self.reflect_prompt.format(task="", history="\n".join(self.history)))
+        response = send_message(self.reflect_prompt.format(task=self.task, history="\n".join(self.history)))
         print(f"[reflect] response: {response}")
         self.history.append(f"Reflection: {response}")
         return response
@@ -141,9 +144,9 @@ class Agent:
         self.history.append(f"Tool Response: {tool_call.output}")
         return tool_call.output
 
-    def output(self, message: str) -> tuple[str, bool]:
-        print(f"\n[output] task: {message}")
-        response = send_message(self.output_prompt.format(task=message, history="\n".join(self.history)))
+    def output(self) -> tuple[str, bool]:
+        print(f"\n[output] task: {self.task}")
+        response = send_message(self.output_prompt.format(task=self.task, history="\n".join(self.history)))
         print(f"[output] response: {response}")
         self.history.append(f"Final Output: {response}")
         return response, "yes" in response.lower()

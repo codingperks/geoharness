@@ -22,6 +22,6 @@ if __name__ == "__main__":
         reflection = agent.reflect()
 
         if "yes" in reflection.lower():
-            final_output, _ = agent.output(task)
+            final_output, _ = agent.output()
             print(f"Final Output: {final_output}")
             break
