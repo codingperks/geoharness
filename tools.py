@@ -20,7 +20,9 @@ class Tools:
 
     @staticmethod
     def web_fetch(url: str) -> ToolResponse:
-        """Fetch and return the text content of a webpage at a given URL."""
+        """Fetch and return the text content of a webpage at a given URL. The URL must start with https:// or http://."""
+        if not url.startswith(("https://", "http://")):
+            return ToolResponse(output=f"Invalid URL '{url}': must start with https:// or http://")
         response = httpx.get(url, follow_redirects=True)
         soup = BeautifulSoup(response.text, "html.parser")
         return ToolResponse(output=soup.get_text(separator="\n", strip=True))
