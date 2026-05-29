@@ -1,3 +1,6 @@
+import inspect
+import json
+
 from models.agents import AgentResponse
 from llm import send_message
 import tools
@@ -29,7 +32,7 @@ class Agent:
             Your response should be in the following format:
             Thought: <your reasoning about what to do next>
             Tool Call: <the name of the tool you want to call, or leave blank if you want to output a final answer>
-            Tool Args: <the arguments to the tool, or leave blank if not calling a tool
+            Tool Args: <the arguments to the tool, or leave blank if not calling a tool, output as a JSON object e.g. {{"lat": 51.5074, "lon": -0.1278}}>
             Output: <final answer if you have completed the task, otherwise leave blank>
         """
         self.observe_prompt: str = """
@@ -109,7 +112,10 @@ class Agent:
             elif line.startswith("Tool Args:"):
                 value = line.removeprefix("Tool Args:").strip()
                 if value:
-                    tool_args = value
+                    try:
+                        tool_args = json.loads(value)
+                    except json.JSONDecodeError:
+                        tool_args = value
             elif line.startswith("Output:"):
                 value = line.removeprefix("Output:").strip()
                 if value:
@@ -120,7 +126,10 @@ class Agent:
         print(f"\n[act] task: {message}")
         if self.task == "":
             self.task = message
-        tool_descriptions = "\n".join(f"- {name}: {desc}" for name, (_, desc) in self.tool_registry.items())
+        tool_descriptions = "\n".join(
+            f"- {name}: {desc} | params: {list(inspect.signature(fn).parameters.keys())}"
+            for name, (fn, desc) in self.tool_registry.items()
+        )
         raw = send_message(self.act_prompt.format(task=self.task, history="\n".join(self.history), tools=tool_descriptions), name="act")
         print(f"[act] response: {raw}")
         self.history.append(f"User: {message}")
@@ -134,12 +143,15 @@ class Agent:
         self.history.append(f"Reflection: {response}")
         return response
 
-    def call_tool(self, tool_name: str, *args, **kwargs):
+    def call_tool(self, tool_name: str, tool_args: dict | str | None = None):
         if tool_name not in self.tool_registry:
             raise ValueError(f"Tool '{tool_name}' not found.")
         fn, _ = self.tool_registry[tool_name]
-        tool_call = fn(*args, **kwargs)
-        self.history.append(f"Executed tool '{tool_name}' with args {args}")
+        if isinstance(tool_args, str):
+            first_param = next(iter(inspect.signature(fn).parameters))
+            tool_args = {first_param: tool_args}
+        tool_call = fn(**(tool_args or {}))
+        self.history.append(f"Executed tool '{tool_name}' with args {tool_args}")
         self.history.append(f"Tool Response: {tool_call.output}")
         return tool_call.output
 
