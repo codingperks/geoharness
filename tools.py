@@ -69,7 +69,23 @@ def get_terrain_data(lat: float, lon: float) -> ToolResponse:
     nrows = int(header["nrows"])
     nodata = float(header.get("nodata_value", -9999))
     rows = [[float(v) for v in line.split()] for line in lines[data_start:] if line.strip()]
-    elevation = rows[nrows // 2][ncols // 2]
+    
+    cx, cy = ncols // 2, nrows // 2
+    elevation = rows[cy][cx]
+
+    def _slope_and_aspect(rows, header, lat):
+        import numpy as np
+        grid = np.array(rows)
+        cellsize_deg = float(header["cellsize"])
+        cellsize_ns = cellsize_deg * 111320
+        cellsize_ew = cellsize_deg * 111320 * np.cos(np.radians(lat))
+        dy, dx = np.gradient(grid, cellsize_ns, cellsize_ew)
+        slope = round(float(np.degrees(np.arctan(np.sqrt(dx[cy, cx]**2 + dy[cy, cx]**2)))), 1)
+        aspect_deg = float(np.degrees(np.arctan2(dx[cy, cx], -dy[cy, cx]))) % 360
+        aspect = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][round(aspect_deg / 45) % 8]
+        return slope, aspect
+
+    slope, aspect = _slope_and_aspect(rows, header, lat)
 
     if elevation == nodata:
         return ToolResponse(output=f"No elevation data available for coordinates ({lat}, {lon})")
@@ -78,6 +94,8 @@ def get_terrain_data(lat: float, lon: float) -> ToolResponse:
         "latitude": lat,
         "longitude": lon,
         "elevation_m": elevation,
+        "slope_degrees": slope,
+        "aspect": aspect,
         "dataset": "SRTM GL1 (30m resolution)",
     }))    
     
