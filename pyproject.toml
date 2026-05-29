@@ -10,6 +10,7 @@ dependencies = [
     "ddgs>=9.14.4",
     "httpx>=0.28.1",
     "langfuse>=4.6.1",
+    "numpy>=2.4.6",
     "pytest>=9.0.3",
     "python-dotenv>=1.2.2",
 ]
