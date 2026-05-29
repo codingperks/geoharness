@@ -128,16 +128,7 @@ def get_climate_data(lat: float, lon: float) -> ToolResponse:
         return ToolResponse(output=f"Failed to retrieve weather data: {response.status_code} {response.text}")
     data = response.json()
     
-    def _label_data(data):
-        # Map parameter codes to human-readable labels
-        mapping = {
-            "ALLSKY_SFC_SW_DWN": "All Sky Surface Shortwave Downward Irradiance",
-            "CLRSKY_SFC_SW_DWN": "Clear Sky Surface Shortwave Downward Irradiance",
-            "T2M": "2 Meter Air Temperature"
-        }
-        return {mapping.get(k, k): v for k, v in data.items()}
-    
-    return ToolResponse(output=json.dumps(_label_data(data)))
+    return ToolResponse(output=json.dumps(data))
 
 # def get_satellite_data(location: str) -> ToolResponse:
 #     """Retrieve satellite data for a given location."""
