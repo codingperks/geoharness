@@ -81,6 +81,8 @@ def get_terrain_data(lat: float, lon: float) -> ToolResponse:
         cellsize_ew = cellsize_deg * 111320 * np.cos(np.radians(lat))
         dy, dx = np.gradient(grid, cellsize_ns, cellsize_ew)
         slope = round(float(np.degrees(np.arctan(np.sqrt(dx[cy, cx]**2 + dy[cy, cx]**2)))), 1)
+        if slope < 1.0:
+            return slope, None
         aspect_deg = float(np.degrees(np.arctan2(dx[cy, cx], -dy[cy, cx]))) % 360
         aspect = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][round(aspect_deg / 45) % 8]
         return slope, aspect
@@ -90,14 +92,18 @@ def get_terrain_data(lat: float, lon: float) -> ToolResponse:
     if elevation == nodata:
         return ToolResponse(output=f"No elevation data available for coordinates ({lat}, {lon})")
 
-    return ToolResponse(output=json.dumps({
+    result = {
         "latitude": lat,
         "longitude": lon,
         "elevation_m": elevation,
         "slope_degrees": slope,
-        "aspect": aspect,
         "dataset": "SRTM GL1 (30m resolution)",
-    }))    
+    }
+    if aspect is not None:
+        result["aspect"] = aspect
+    else:
+        result["aspect_note"] = "terrain too flat for meaningful aspect calculation"
+    return ToolResponse(output=json.dumps(result))    
     
 
 def get_climate_data(lat: float, lon: float) -> ToolResponse:
