@@ -24,9 +24,8 @@ if __name__ == "__main__":
 
             reflection = agent.reflect()
 
-            if "yes" in reflection.lower():
+            if "task_complete: yes" in reflection.lower():
                 final_output, _ = agent.output()
-                print(f"Final Output: {final_output}")
                 break
 
     langfuse.flush()
