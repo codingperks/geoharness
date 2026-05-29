@@ -1,8 +1,14 @@
+import io
 import json
+import os
+import zipfile
 import httpx
 from bs4 import BeautifulSoup
 from ddgs import DDGS
+from dotenv import load_dotenv
 from models.tools import ToolResponse
+
+load_dotenv()
 
 
 def web_search(query: str) -> ToolResponse:
@@ -21,9 +27,60 @@ def web_fetch(url: str) -> ToolResponse:
     return ToolResponse(output=soup.get_text(separator="\n", strip=True))
 
 
-def get_terrain_data(location: str) -> ToolResponse:
-    """Retrieve terrain data for a given location."""
-    return ToolResponse(output=f"Terrain data for '{location}'")    
+def get_terrain_data(lat: float, lon: float) -> ToolResponse:
+    """Retrieve terrain elevation data for a given coordinate.
+    The input should be two floats: latitude, longitude. For example: 51.5074, -0.1278 for London.
+    Returns elevation in metres above sea level from the SRTM GL1 30m dataset.
+    """
+    offset = 0.01
+    params = {
+        "demtype": "SRTMGL1",
+        "south": lat - offset,
+        "north": lat + offset,
+        "west": lon - offset,
+        "east": lon + offset,
+        "outputFormat": "AAIGrid",
+        "API_Key": os.getenv("OPENTOPOGRAPHY_KEY"),
+    }
+    response = httpx.get("https://portal.opentopography.org/API/globaldem", params=params, timeout=30.0)
+    if response.status_code != 200:
+        return ToolResponse(output=f"Failed to retrieve terrain data: {response.status_code} {response.text}")
+
+    # Response may be a zip archive containing the .asc file
+    if response.content[:2] == b"PK":
+        with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
+            asc_name = next(n for n in zf.namelist() if n.endswith(".asc"))
+            text = zf.read(asc_name).decode()
+    else:
+        text = response.text
+
+    lines = text.strip().splitlines()
+    header = {}
+    data_start = 0
+    for i, line in enumerate(lines):
+        parts = line.split()
+        if parts[0].lower() in ("ncols", "nrows", "xllcorner", "yllcorner", "xllcenter", "yllcenter", "cellsize", "nodata_value"):
+            header[parts[0].lower()] = parts[1]
+            data_start = i + 1
+        else:
+            break
+
+    ncols = int(header["ncols"])
+    nrows = int(header["nrows"])
+    nodata = float(header.get("nodata_value", -9999))
+    rows = [[float(v) for v in line.split()] for line in lines[data_start:] if line.strip()]
+    elevation = rows[nrows // 2][ncols // 2]
+
+    if elevation == nodata:
+        return ToolResponse(output=f"No elevation data available for coordinates ({lat}, {lon})")
+
+    return ToolResponse(output=json.dumps({
+        "latitude": lat,
+        "longitude": lon,
+        "elevation_m": elevation,
+        "dataset": "SRTM GL1 (30m resolution)",
+    }))    
+    
 
 def get_climate_data(lat: float, lon: float) -> ToolResponse:
     """Retrieve climate data for a given location.
