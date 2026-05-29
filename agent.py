@@ -1,6 +1,6 @@
 from models.agents import AgentResponse
 from llm import send_message
-from tools import Tools
+import tools
 
 class Agent:
     """
@@ -83,8 +83,7 @@ class Agent:
             Is the task complete? <yes/no>
         """
         self.history: list[str] = []
-        self.tools = Tools()
-        self.tool_registry: dict = self.tools.get_registry()
+        self.tool_registry: dict = tools.REGISTRY
         
     def observe(self, observation: str) -> str:
         print(f"\n[observe] input: {observation}")
