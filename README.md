@@ -11,9 +11,16 @@ Example target question: 'Is this a good coordinate to place solar panels?'
 
 ## Current architecture
 
-Keeping things very simple, a single ReAct loop + data tools (web search + data feeds). Keen to understand how well an agent can reflect on its own performance - slowly adding in structure to its harness as I tune.
+A single ReAct loop (`act → observe → reflect`) with a small set of primitive tools. Keen to understand how well an agent can reflect on its own performance — slowly adding structure to the harness as I tune.
 
-Current tools are: web search (broad metadata-based search for multiple pages at once) and web fetch (targeted scraping-based search for deeper dives). Intending to add tools for geospatial data and attempt to tune the system from there.
+**Tools**
+
+| Tool | Source | What it returns |
+|---|---|---|
+| `web_search` | DuckDuckGo | Broad metadata-based search across multiple pages |
+| `web_fetch` | HTTP scrape | Full text of a specific URL for deeper dives |
+| `get_climate_data` | NASA POWER | Monthly solar irradiance and temperature averages for a coordinate |
+| `get_terrain_data` | OpenTopography (SRTM GL1) | Elevation, slope, and aspect for a ~1km radius around a coordinate |
 
 ## How to currently run
 
