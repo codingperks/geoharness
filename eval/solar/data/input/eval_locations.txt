@@ -1,0 +1,17 @@
+Good locations
+    Almeria, Southern Spain: 37.02, -2.42
+    Algeria, North Africa: 27.5, 5.5
+    Texas, Southern US: 30.241771, -101.384763
+
+Marginal
+    N of Truro: 50.02, -5.15
+    N Turkey Coast: 41.60, 35.70
+    Vermont: 44.420716, -72.551722
+    Croatian Coast: 43.820595, 15.724002
+    N of Krakow: 50.441428, 20.480605
+
+Bad locations
+    Northern Norway: 70.768518, 25.222355
+    Amazon Rainforest: -3.467477, -62.214181
+    N-facing Swiss Alps: 46.42, 7.75
+
