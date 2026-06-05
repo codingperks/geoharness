@@ -9,6 +9,9 @@ from main import run
 from models.eval import EvalTestCase, EvalLocation, EvalResult
 from models.tools import ClimateData, TerrainData
 import llm
+import tools
+
+EVAL_TOOLS = {k: v for k, v in tools.REGISTRY.items() if k in ("get_climate_data", "get_terrain_data")}
 
 DATASET_PATH = os.path.join(os.path.dirname(__file__), "data/output/eval_dataset.json")
 RESULTS_PATH = os.path.join(os.path.dirname(__file__), "data/output/eval_results.json")
@@ -32,7 +35,7 @@ def load_test_cases() -> list[EvalTestCase]:
 
 def evaluate_case(tc: EvalTestCase) -> EvalResult:
     prompt = f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location for ground-mounted solar panels?"
-    output = run(prompt)
+    output = run(prompt, tool_registry=EVAL_TOOLS)
     verdict = next((v for v in ["BAD", "MARGINAL", "GOOD"] if v in output), None)
     return EvalResult(
         test_case=tc,
@@ -46,8 +49,6 @@ def evaluate_case(tc: EvalTestCase) -> EvalResult:
     
 def evaluate():
     test_cases: list[EvalTestCase] = load_test_cases()
-    
-    # async call evaluate_case
     results: list[EvalResult] = []
     with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(evaluate_case, tc): tc for tc in test_cases}

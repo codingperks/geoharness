@@ -3,8 +3,8 @@ from agent import Agent
 from langfuse import get_client
 
 
-def run(task: str) -> str:
-    agent = Agent("GeoHarness Agent")
+def run(task: str, tool_registry: dict | None = None) -> str:
+    agent = Agent("GeoHarness Agent", tool_registry=tool_registry)
     langfuse = get_client()
 
     with langfuse.start_as_current_observation(name="Geoharness react", as_type="span"):

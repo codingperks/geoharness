@@ -11,7 +11,7 @@ class Agent:
     ReAct agent: observe -> reflect -> act -> observe -> reflect -> act etc. 
     """
     
-    def __init__(self, name: str):
+    def __init__(self, name: str, tool_registry: dict | None = None):
         self.name: str = name
         self.task: str = ""
         self.act_prompt: str = """
@@ -87,7 +87,7 @@ class Agent:
             Is the task complete? <yes/no>
         """
         self.history: list[str] = []
-        self.tool_registry: dict = tools.REGISTRY
+        self.tool_registry: dict = tool_registry if tool_registry is not None else tools.REGISTRY
         
     def observe(self, observation: str) -> str:
         print(f"\n[observe] input: {observation}")
