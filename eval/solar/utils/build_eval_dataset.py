@@ -1,26 +1,27 @@
 """
-Utility to probe a coordinate against the climate and terrain APIs.
-Useful for deciding whether a location belongs in good / marginal / bad eval categories.
-Selecting based on irradiance and terrain data.
+Probes coordinates against the climate and terrain APIs, scores each location,
+and writes the eval dataset JSON.
 
 Usage:
-    uv run eval/solar/utils/probe_location.py <lat> <lon>           # single coordinate
-    uv run eval/solar/utils/probe_location.py                        # all locations in eval_locations.txt
+    uv run eval/solar/utils/build_eval_dataset.py                        # all locations in eval_locations.txt
+    uv run eval/solar/utils/build_eval_dataset.py <lat> <lon>            # single coordinate (prints scores, no file output)
 """
 
 import json
 import sys
 import os
 from dataclasses import asdict
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../../.."))
 
 from tools import get_climate_data, get_terrain_data
 from models.tools import ClimateData, TerrainData
+from models.eval import EvalLocation, EvalTestCase
 
-OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "../data/output/selection/probe_results.json")
+OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "../data/output/eval_dataset.json")
 
 
-def probe(lat: float, lon: float, name: str = "") -> dict:
+def probe(lat: float, lon: float, name: str = "") -> EvalTestCase | None:
     label = f"{name} ({lat}, {lon})" if name else f"({lat}, {lon})"
     print(f"\n{'─' * 60}")
     print(f"  {label}")
@@ -31,7 +32,7 @@ def probe(lat: float, lon: float, name: str = "") -> dict:
         terrain = TerrainData.from_response(get_terrain_data(lat, lon))
     except Exception as e:
         print(f"  ERROR: {e}")
-        return {"name": name, "lat": lat, "lon": lon, "error": str(e)}
+        return None
 
     allsky = climate.allsky_irradiance["ANN"]
     clearsky = climate.clearsky_irradiance["ANN"]
@@ -70,7 +71,7 @@ def probe(lat: float, lon: float, name: str = "") -> dict:
     if terrain.aspect is not None:
         scores.append(label_aspect(terrain.aspect))
 
-    overall = "BAD" if "BAD" in scores else "MARGINAL" if "MARGINAL" in scores else "GOOD"
+    verdict = "BAD" if "BAD" in scores else "MARGINAL" if "MARGINAL" in scores else "GOOD"
 
     print(f"  Solar (all-sky annual):   {allsky} kWh/m²/day  →  {label_irradiance(allsky)}")
     print(f"  Cloud cover loss:         {cloud_loss_pct}%  →  {label_cloud_loss(cloud_loss_pct)}")
@@ -78,16 +79,10 @@ def probe(lat: float, lon: float, name: str = "") -> dict:
     print(f"  Slope:                    {terrain.slope_degrees}°  →  {label_slope(terrain.slope_degrees)}")
     print(f"  Aspect:                   {terrain.aspect or 'flat'}  →  {label_aspect(terrain.aspect)}")
     print(f"  Elevation:                {terrain.elevation_m}m  (not scored)")
-    print(f"\n  OVERALL: {overall}")
+    print(f"\n  OVERALL: {verdict}")
 
-    return {
-        "name": name,
-        "lat": lat,
-        "lon": lon,
-        "overall": overall,
-        "climate": asdict(climate),
-        "terrain": asdict(terrain),
-    }
+    location = EvalLocation(name=name, lat=lat, lon=lon, climate_data=climate, terrain_data=terrain)
+    return EvalTestCase(location=location, expected_verdict=verdict)
 
 
 def parse_locations_file(path: str) -> list[tuple[str, float, float]]:
@@ -108,12 +103,16 @@ def parse_locations_file(path: str) -> list[tuple[str, float, float]]:
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:
-        result = probe(float(sys.argv[1]), float(sys.argv[2]))
-        results = [result]
+        probe(float(sys.argv[1]), float(sys.argv[2]))
     else:
         locations_file = os.path.join(os.path.dirname(__file__), "../data/input/eval_locations.txt")
-        results = [probe(lat, lon, name) for name, lat, lon in parse_locations_file(locations_file)]
-
-    with open(OUTPUT_PATH, "w") as f:
-        json.dump(results, f, indent=2)
-    print(f"\nResults saved to {OUTPUT_PATH}")
+        test_cases = [
+            tc for tc in (
+                probe(lat, lon, name)
+                for name, lat, lon in parse_locations_file(locations_file)
+            )
+            if tc is not None
+        ]
+        with open(OUTPUT_PATH, "w") as f:
+            json.dump([asdict(tc) for tc in test_cases], f, indent=2)
+        print(f"\nDataset saved to {OUTPUT_PATH} ({len(test_cases)} locations)")
