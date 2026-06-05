@@ -1,31 +1,31 @@
-import json
 from tools import get_climate_data, get_terrain_data
+from models.tools import ClimateData, TerrainData
+
+LAT = 51.5074
+LON = -0.1278
 
 
 def test_get_climate_data():
-    # live api call
-    # London
-    lat = 51.5074
-    lon = -0.1278
+    result = get_climate_data(LAT, LON)
+    data = ClimateData.from_response(result)
 
-    result = get_climate_data(lat, lon)
-    data = json.loads(result.output)
+    print(f"Annual all-sky irradiance: {data.allsky_irradiance['ANN']} kWh/m²/day")
+    print(f"Annual clear-sky irradiance: {data.clearsky_irradiance['ANN']} kWh/m²/day")
+    print(f"Annual temperature: {data.temperature_2m['ANN']}°C")
 
-    properties = data.get("properties", {})
-    parameters = properties.get("parameter", {})
+    assert data.allsky_irradiance["ANN"] > 0
+    assert data.clearsky_irradiance["ANN"] > data.allsky_irradiance["ANN"]
+    assert -50 < data.temperature_2m["ANN"] < 50
 
-    for param, monthly in parameters.items():
-        values = list(monthly.values())
-        print(f"{param}: {values}")
-        
+
 def test_get_terrain_data():
-    # live api call
-    # London
-    lat = 51.5074
-    lon = -0.1278
+    result = get_terrain_data(LAT, LON)
+    data = TerrainData.from_response(result)
 
-    result = get_terrain_data(lat, lon)
-    data = json.loads(result.output)
+    print(f"Elevation: {data.elevation_m}m")
+    print(f"Slope: {data.slope_degrees}°")
+    print(f"Aspect: {data.aspect}")
 
-    print(f"Terrain data: {data}")
+    assert data.elevation_m > -500
+    assert 0 <= data.slope_degrees < 90
     
