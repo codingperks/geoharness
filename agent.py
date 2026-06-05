@@ -82,6 +82,7 @@ class Agent:
             {history}
 
             Decide on the final output of the task and whether you have completed it.
+            If the task requires a verdict, conclude your final output with exactly GOOD, MARGINAL, or BAD.
             Final Output: <your final output>
             Is the task complete? <yes/no>
         """

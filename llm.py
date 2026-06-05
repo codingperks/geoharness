@@ -6,13 +6,13 @@ from langfuse import get_client
 load_dotenv()
 
 _client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_KEY"))
-_model = os.getenv("LLM_MODEL", "claude-sonnet-4-5")
+model = os.getenv("LLM_MODEL", "claude-sonnet-4-5")
 _langfuse = get_client()
 
 def send_message(prompt: str, name: str = "llm_call") -> str:
-    with _langfuse.start_as_current_observation(as_type="generation", name=name, model=_model, input=prompt) as generation:
+    with _langfuse.start_as_current_observation(as_type="generation", name=name, model=model, input=prompt) as generation:
         message = _client.messages.create(
-            model=_model,
+            model=model,
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}],
         )

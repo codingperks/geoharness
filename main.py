@@ -2,12 +2,8 @@ import sys
 from agent import Agent
 from langfuse import get_client
 
-if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python main.py \"<task>\"")
-        sys.exit(1)
 
-    task = sys.argv[1]
+def run(task: str) -> str:
     agent = Agent("GeoHarness Agent")
     langfuse = get_client()
 
@@ -29,3 +25,12 @@ if __name__ == "__main__":
                 break
 
     langfuse.flush()
+    return final_output
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python main.py \"<task>\"")
+        sys.exit(1)
+
+    print(run(sys.argv[1]))
