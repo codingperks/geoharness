@@ -1,3 +1,4 @@
+import functools
 import io
 import json
 import os
@@ -12,6 +13,23 @@ from models.tools import ToolResponse
 load_dotenv()
 
 _TRANSIENT = (httpx.ReadTimeout, httpx.ConnectTimeout, httpx.NetworkError)
+_CACHE_DIR = os.path.join(os.path.dirname(__file__), ".cache")
+
+
+def _disk_cache(fn):
+    @functools.wraps(fn)
+    def wrapper(*args, **kwargs):
+        os.makedirs(_CACHE_DIR, exist_ok=True)
+        key = "_".join([fn.__name__] + [str(a) for a in args] + [f"{k}{v}" for k, v in sorted(kwargs.items())])
+        cache_path = os.path.join(_CACHE_DIR, f"{key}.json")
+        if os.path.exists(cache_path):
+            with open(cache_path) as f:
+                return ToolResponse(output=f.read())
+        result = fn(*args, **kwargs)
+        with open(cache_path, "w") as f:
+            f.write(result.output)
+        return result
+    return wrapper
 
 
 def _get_with_retry(url: str, **kwargs) -> httpx.Response:
@@ -40,6 +58,7 @@ def web_fetch(url: str) -> ToolResponse:
     return ToolResponse(output=soup.get_text(separator="\n", strip=True))
 
 
+@_disk_cache
 def get_terrain_data(lat: float, lon: float) -> ToolResponse:
     """Retrieve terrain elevation data for a given coordinate.
     The input should be two floats: latitude, longitude. For example: 51.5074, -0.1278 for London.
@@ -119,6 +138,7 @@ def get_terrain_data(lat: float, lon: float) -> ToolResponse:
     return ToolResponse(output=json.dumps(result))    
     
 
+@_disk_cache
 def get_climate_data(lat: float, lon: float) -> ToolResponse:
     """Retrieve climate data for a given location.
         The input should be two floats: latitude, longitude. For example: 51.5074, -0.1278 for London.

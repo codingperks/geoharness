@@ -220,5 +220,6 @@ __marimo__/
 # misc
 ideas.md
 research.md
+.cache/
 .claude/
 .vscode/
