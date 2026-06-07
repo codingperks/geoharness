@@ -14,7 +14,7 @@ import tools
 
 EVAL_TOOLS = {k: v for k, v in tools.REGISTRY.items() if k in ("get_climate_data", "get_terrain_data")}
 
-DATASET_PATH = os.path.join(os.path.dirname(__file__), "data/output/eval_dataset.json")
+DATASET_PATH = os.path.join(os.path.dirname(__file__), "data/eval_dataset.json")
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 
 
@@ -36,7 +36,7 @@ def load_test_cases() -> list[EvalTestCase]:
 
 def evaluate_case(tc: EvalTestCase) -> EvalResult:
     prompt = f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location for ground-mounted solar panels? Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return"
-    output, iterations = run(prompt, tool_registry=EVAL_TOOLS)
+    output, iterations, tool_error = run(prompt, tool_registry=EVAL_TOOLS)
     verdict = next((v for v in ["BAD", "MARGINAL", "GOOD"] if v in output), None)
     return EvalResult(
         test_case=tc,
@@ -46,6 +46,7 @@ def evaluate_case(tc: EvalTestCase) -> EvalResult:
         prompt=prompt,
         model=llm.model,
         iterations=iterations,
+        tool_error=tool_error,
     )
     
     
@@ -63,7 +64,8 @@ def evaluate():
     print(f"{'═' * 60}")
     for r in sorted(results, key=lambda r: r.test_case.location.name):
         status = "PASS" if r.passed else "FAIL"
-        print(f"  [{status}] {r.test_case.location.name}: expected={r.test_case.expected_verdict}, got={r.actual_verdict} ({r.iterations} iter)")
+        flag = "  ⚠ tool error" if r.tool_error else ""
+        print(f"  [{status}] {r.test_case.location.name}: expected={r.test_case.expected_verdict}, got={r.actual_verdict} ({r.iterations} iter){flag}")
 
     os.makedirs(RESULTS_DIR, exist_ok=True)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -79,6 +81,7 @@ def evaluate():
                     "prompt": r.prompt,
                     "model": r.model,
                     "iterations": r.iterations,
+                    "tool_error": r.tool_error,
                     "output": r.output,
                 }
                 for r in results
