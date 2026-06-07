@@ -1,6 +1,7 @@
 import io
 import json
 import os
+import time
 import zipfile
 import httpx
 from bs4 import BeautifulSoup
@@ -9,6 +10,18 @@ from dotenv import load_dotenv
 from models.tools import ToolResponse
 
 load_dotenv()
+
+_TRANSIENT = (httpx.ReadTimeout, httpx.ConnectTimeout, httpx.NetworkError)
+
+
+def _get_with_retry(url: str, **kwargs) -> httpx.Response:
+    for attempt in range(3):
+        try:
+            return httpx.get(url, **kwargs)
+        except _TRANSIENT:
+            if attempt == 2:
+                raise
+            time.sleep(5 * (attempt + 1))
 
 
 def web_search(query: str) -> ToolResponse:
@@ -42,7 +55,7 @@ def get_terrain_data(lat: float, lon: float) -> ToolResponse:
         "outputFormat": "AAIGrid",
         "API_Key": os.getenv("OPENTOPOGRAPHY_KEY"),
     }
-    response = httpx.get("https://portal.opentopography.org/API/globaldem", params=params, timeout=30.0)
+    response = _get_with_retry("https://portal.opentopography.org/API/globaldem", params=params, timeout=30.0)
     if response.status_code != 200:
         return ToolResponse(output=f"Failed to retrieve terrain data: {response.status_code} {response.text}")
 
@@ -123,7 +136,7 @@ def get_climate_data(lat: float, lon: float) -> ToolResponse:
         "latitude": lat,
         "format": "JSON"
     }
-    response = httpx.get(base_url, params=params)
+    response = _get_with_retry(base_url, params=params, timeout=30.0)
     if response.status_code != 200:
         return ToolResponse(output=f"Failed to retrieve weather data: {response.status_code} {response.text}")
     data = response.json()
