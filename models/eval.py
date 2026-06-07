@@ -26,3 +26,4 @@ class EvalResult:
     prompt: str
     model: str
     iterations: int
+    tool_error: bool
