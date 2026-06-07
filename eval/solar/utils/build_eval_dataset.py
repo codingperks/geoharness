@@ -18,7 +18,7 @@ from tools import get_climate_data, get_terrain_data
 from models.tools import ClimateData, TerrainData
 from models.eval import EvalLocation, EvalTestCase
 
-OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "../data/output/eval_dataset.json")
+OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "../data/eval_dataset.json")
 
 
 def probe(lat: float, lon: float, name: str = "") -> EvalTestCase | None:
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     if len(sys.argv) == 3:
         probe(float(sys.argv[1]), float(sys.argv[2]))
     else:
-        locations_file = os.path.join(os.path.dirname(__file__), "../data/input/eval_locations.txt")
+        locations_file = os.path.join(os.path.dirname(__file__), "../data/eval_locations.txt")
         test_cases = [
             tc for tc in (
                 probe(lat, lon, name)
