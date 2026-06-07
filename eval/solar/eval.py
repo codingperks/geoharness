@@ -15,7 +15,7 @@ import tools
 EVAL_TOOLS = {k: v for k, v in tools.REGISTRY.items() if k in ("get_climate_data", "get_terrain_data")}
 
 DATASET_PATH = os.path.join(os.path.dirname(__file__), "data/output/eval_dataset.json")
-RESULTS_DIR = os.path.join(os.path.dirname(__file__), "data/output/results")
+RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 
 
 def load_test_cases() -> list[EvalTestCase]:
