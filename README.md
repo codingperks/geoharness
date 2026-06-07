@@ -22,6 +22,19 @@ A single ReAct loop (`act → observe → reflect`) with a small set of primitiv
 | `get_climate_data` | NASA POWER | Monthly solar irradiance and temperature averages for a coordinate |
 | `get_terrain_data` | OpenTopography (SRTM GL1) | Elevation, slope, and aspect for a ~1km radius around a coordinate |
 
+## Eval
+
+A hand-labelled eval set of 11 locations tests whether the agent reaches the correct GOOD / MARGINAL / BAD verdict from raw geospatial data alone.
+
+Scoring rules are documented in [`eval/solar/eval_rules.md`](eval/solar/eval_rules.md). Locations were selected to cover a spread of latitudes, hemispheres, and failure modes (low irradiance, high cloud cover, bad aspect, steep slope). The eval is intentionally run with `web_search` excluded — the agent must reason from tool data alone, not training knowledge.
+
+**Running the eval:**
+```
+uv run eval/solar/eval.py
+```
+
+Results are saved to `eval/solar/data/output/results/` with a UTC timestamp per run.
+
 ## How to currently run
 
 1. Copy `.env.example` to `.env` and fill in your credentials
