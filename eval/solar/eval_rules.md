@@ -66,7 +66,7 @@ Specific coordinates were identified by rough geographic knowledge (e.g. known s
 
 **Note:** Aspect is only scored when slope > 10°. On gentle terrain, panels can be independently oriented regardless of slope direction, so terrain aspect is not a meaningful constraint.
 
-**Source:** Basic solar geometry — south-facing surfaces in the northern hemisphere receive maximum annual solar exposure. East/west-facing surfaces lose 15–25% of annual yield compared to south-facing. North-facing surfaces receive minimal direct irradiance and are generally unsuitable for fixed-tilt installations. (Hay & McKay, 1985; PVGIS methodology documentation.)
+**Source:** Basic solar geometry — south-facing surfaces in the northern hemisphere receive maximum annual solar exposure. East/west-facing surfaces typically lose 15–25% of annual yield compared to south-facing (exact loss depends on latitude, tilt, and module configuration; consistent with simulation results across the PV literature). North-facing surfaces receive minimal direct irradiance and are generally unsuitable for fixed-tilt installations. (Hay & McKay, 1985.)
 
 ---
 
@@ -78,7 +78,7 @@ Specific coordinates were identified by rough geographic knowledge (e.g. known s
 | MARGINAL | 10° – 20°   |
 | BAD      | > 20°       |
 
-**Source:** Ground-mounted solar installations require accessible, stable terrain. Slopes above 20° significantly increase civil engineering costs (grading, anchoring, access roads) and introduce erosion risk. 10–20° is installable but adds material cost. This is consistent with general solar farm site assessment criteria used by developers (DNV GL site assessment guidelines; IEA PVPS Task 8).
+**Source:** Ground-mounted solar installations require accessible, stable terrain. Slopes above 20° significantly increase civil engineering costs (grading, anchoring, access roads) and introduce erosion risk. 10–20° is installable but adds material cost. These thresholds reflect general solar farm site assessment practice; specific limits vary by developer and jurisdiction.
 
 ---
 
@@ -91,7 +91,7 @@ Specific coordinates were identified by rough geographic knowledge (e.g. known s
 | BAD      | < 0°C or > 65°C |
 
 **Note:** This uses annual average air temperature as a proxy for thermal stress on panels. Panel surface temperature runs ~20–30°C above ambient. Above 25°C ambient (i.e. ~45–55°C panel temp), efficiency losses from the temperature coefficient (~0.35–0.45%/°C above STC of 25°C) become significant. Below 0°C annual average, freeze-thaw cycling and prolonged snow cover reduce output and increase maintenance burden.  
-**Source:** IEC 61215 standard test conditions (STC = 25°C); manufacturer temperature coefficient data; Skoplaki & Palyvos (2009), "On the temperature dependence of photovoltaic module electrical performance."
+**Source:** IEC 61215 standard test conditions (STC = 25°C); manufacturer temperature coefficient data; Skoplaki & Palyvos (2009), "On the temperature dependence of photovoltaic module electrical performance," Solar Energy, vol. 83. Note: the paper reports ~0.40–0.50%/°C for standard crystalline silicon; the lower end of the range here (~0.35%/°C) applies to premium HIT/heterojunction modules.
 
 ---
 
