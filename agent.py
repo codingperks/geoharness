@@ -27,8 +27,6 @@ class Agent:
             You have access to the following tools:
             {tools}
             
-            If web_search does not return enough detail, use web_fetch with a direct URL to read the full page.
-
             Your response should be in the following format:
             Thought: <your reasoning about what to do next>
             Tool Call: <the name of the tool you want to call, or leave blank if you want to output a final answer>
