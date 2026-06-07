@@ -64,7 +64,6 @@ class Agent:
 
             Evaluate whether the task is complete and whether your approach is working.
             Before answering, check: did you make any assumptions about the contents of a source without actually reading it? If so, mark the task as incomplete and verify those assumptions first.
-            If a web_fetch call failed, try an alternative URL rather than falling back to inference.
             TASK_COMPLETE: yes or no
             What is working: <what is going well>
             Unverified assumptions: <list any conclusions drawn from inference rather than direct evidence, or leave blank if none>
@@ -80,7 +79,6 @@ class Agent:
             {history}
 
             Decide on the final output of the task and whether you have completed it.
-            If the task requires a verdict, conclude your final output with exactly GOOD, MARGINAL, or BAD.
             Final Output: <your final output>
             Is the task complete? <yes/no>
         """

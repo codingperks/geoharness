@@ -35,7 +35,7 @@ def load_test_cases() -> list[EvalTestCase]:
 
 
 def evaluate_case(tc: EvalTestCase) -> EvalResult:
-    prompt = f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location for ground-mounted solar panels?"
+    prompt = f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location for ground-mounted solar panels? Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return"
     output, iterations = run(prompt, tool_registry=EVAL_TOOLS)
     verdict = next((v for v in ["BAD", "MARGINAL", "GOOD"] if v in output), None)
     return EvalResult(
