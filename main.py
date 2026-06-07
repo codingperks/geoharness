@@ -7,8 +7,10 @@ def run(task: str, tool_registry: dict | None = None) -> str:
     agent = Agent("GeoHarness Agent", tool_registry=tool_registry)
     langfuse = get_client()
 
+    max_iterations = 10
+    iterations = 0
     with langfuse.start_as_current_observation(name="Geoharness react", as_type="span"):
-        while True:
+        for iterations in range(1, max_iterations + 1):
             response = agent.act(task)
 
             if response.tool_call:
@@ -23,9 +25,11 @@ def run(task: str, tool_registry: dict | None = None) -> str:
             if "task_complete: yes" in reflection.lower():
                 final_output, _ = agent.output()
                 break
+        else:
+            final_output, _ = agent.output()
 
     langfuse.flush()
-    return final_output
+    return final_output, iterations
 
 
 if __name__ == "__main__":
@@ -33,4 +37,6 @@ if __name__ == "__main__":
         print("Usage: python main.py \"<task>\"")
         sys.exit(1)
 
-    print(run(sys.argv[1]))
+    output, iterations = run(sys.argv[1])
+    print(output)
+    print(f"[{iterations} iteration(s)]")

@@ -25,3 +25,4 @@ class EvalResult:
     output: str
     prompt: str
     model: str
+    iterations: int

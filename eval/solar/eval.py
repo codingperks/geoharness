@@ -2,6 +2,7 @@ import json
 import os
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../.."))
 
@@ -14,7 +15,7 @@ import tools
 EVAL_TOOLS = {k: v for k, v in tools.REGISTRY.items() if k in ("get_climate_data", "get_terrain_data")}
 
 DATASET_PATH = os.path.join(os.path.dirname(__file__), "data/output/eval_dataset.json")
-RESULTS_PATH = os.path.join(os.path.dirname(__file__), "data/output/eval_results.json")
+RESULTS_DIR = os.path.join(os.path.dirname(__file__), "data/output/results")
 
 
 def load_test_cases() -> list[EvalTestCase]:
@@ -35,7 +36,7 @@ def load_test_cases() -> list[EvalTestCase]:
 
 def evaluate_case(tc: EvalTestCase) -> EvalResult:
     prompt = f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location for ground-mounted solar panels?"
-    output = run(prompt, tool_registry=EVAL_TOOLS)
+    output, iterations = run(prompt, tool_registry=EVAL_TOOLS)
     verdict = next((v for v in ["BAD", "MARGINAL", "GOOD"] if v in output), None)
     return EvalResult(
         test_case=tc,
@@ -44,13 +45,14 @@ def evaluate_case(tc: EvalTestCase) -> EvalResult:
         output=output,
         prompt=prompt,
         model=llm.model,
+        iterations=iterations,
     )
     
     
 def evaluate():
     test_cases: list[EvalTestCase] = load_test_cases()
     results: list[EvalResult] = []
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    with ThreadPoolExecutor(max_workers=2) as executor:
         futures = {executor.submit(evaluate_case, tc): tc for tc in test_cases}
         for future in as_completed(futures):
             results.append(future.result())
@@ -61,9 +63,12 @@ def evaluate():
     print(f"{'═' * 60}")
     for r in sorted(results, key=lambda r: r.test_case.location.name):
         status = "PASS" if r.passed else "FAIL"
-        print(f"  [{status}] {r.test_case.location.name}: expected={r.test_case.expected_verdict}, got={r.actual_verdict}")
+        print(f"  [{status}] {r.test_case.location.name}: expected={r.test_case.expected_verdict}, got={r.actual_verdict} ({r.iterations} iter)")
 
-    with open(RESULTS_PATH, "w") as f:
+    os.makedirs(RESULTS_DIR, exist_ok=True)
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    results_path = os.path.join(RESULTS_DIR, f"eval_{timestamp}.json")
+    with open(results_path, "w") as f:
         json.dump(
             [
                 {
@@ -73,6 +78,7 @@ def evaluate():
                     "passed": r.passed,
                     "prompt": r.prompt,
                     "model": r.model,
+                    "iterations": r.iterations,
                     "output": r.output,
                 }
                 for r in results
@@ -80,7 +86,7 @@ def evaluate():
             f,
             indent=2,
         )
-    print(f"\nFull results saved to {RESULTS_PATH}")
+    print(f"\nFull results saved to {results_path}")
     return results
 
 
