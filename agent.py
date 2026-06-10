@@ -5,13 +5,28 @@ from models.agents import AgentResponse
 from llm import send_message
 import tools
 
+_DEFAULT_OUTPUT_CONFIG = {
+    "format": {
+        "type": "json_schema",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "output": {"type": "string"},
+            },
+            "required": ["output"],
+            "additionalProperties": False,
+        }
+    }
+}
+
+
 class Agent:
     """
     An agent that can perform tasks by calling tools and observing results.
     ReAct agent: observe -> reflect -> act -> observe -> reflect -> act etc. 
     """
     
-    def __init__(self, name: str, tool_registry: dict | None = None):
+    def __init__(self, name: str, tool_registry: dict | None = None, output_config: dict | None = None):
         self.name: str = name
         self.task: str = ""
         self.act_prompt: str = """
@@ -84,6 +99,7 @@ class Agent:
         """
         self.history: list[str] = []
         self.tool_registry: dict = tool_registry if tool_registry is not None else tools.REGISTRY
+        self.output_config: dict = output_config if output_config is not None else _DEFAULT_OUTPUT_CONFIG
         
     def observe(self, observation: str) -> str:
         print(f"\n[observe] input: {observation}")
@@ -152,12 +168,12 @@ class Agent:
         self.history.append(f"Tool Response: {tool_call.output}")
         return tool_call.output
 
-    def output(self) -> tuple[str, bool]:
+    def output(self) -> dict:
         print(f"\n[output] task: {self.task}")
-        response = send_message(self.output_prompt.format(task=self.task, history="\n".join(self.history)), name="output")
+        response = send_message(self.output_prompt.format(task=self.task, history="\n".join(self.history)), name="output", output_config=self.output_config)
         print(f"[output] response: {response}")
         self.history.append(f"Final Output: {response}")
-        return response, "yes" in response.lower()
+        return response
     
 
     

@@ -22,7 +22,7 @@ class EvalResult:
     test_case: EvalTestCase
     actual_verdict: str | None
     passed: bool
-    output: str
+    output: dict
     prompt: str
     model: str
     iterations: int

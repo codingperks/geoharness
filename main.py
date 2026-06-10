@@ -6,8 +6,8 @@ from langfuse import get_client
 _TOOL_ERROR_STRINGS = ("failed to retrieve", "no elevation data available")
 
 
-def run(task: str, tool_registry: dict | None = None) -> tuple[str, int, bool]:
-    agent = Agent("GeoHarness Agent", tool_registry=tool_registry)
+def run(task: str, tool_registry: dict | None = None, output_config: dict | None = None) -> tuple[dict, int, bool]:
+    agent = Agent("GeoHarness Agent", tool_registry=tool_registry, output_config=output_config)
     langfuse = get_client()
 
     max_iterations = 10
@@ -29,10 +29,10 @@ def run(task: str, tool_registry: dict | None = None) -> tuple[str, int, bool]:
             reflection = agent.reflect()
 
             if "task_complete: yes" in reflection.lower():
-                final_output, _ = agent.output()
+                final_output = agent.output()
                 break
         else:
-            final_output, _ = agent.output()
+            final_output = agent.output()
 
     langfuse.flush()
     return final_output, iterations, tool_error
@@ -44,5 +44,5 @@ if __name__ == "__main__":
         sys.exit(1)
 
     output, iterations, tool_error = run(sys.argv[1])
-    print(output)
+    print(output.get("output", output))
     print(f"[{iterations} iteration(s)]{'  ⚠ tool error' if tool_error else ''}")

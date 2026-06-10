@@ -17,6 +17,21 @@ EVAL_TOOLS = {k: v for k, v in tools.REGISTRY.items() if k in ("get_climate_data
 DATASET_PATH = os.path.join(os.path.dirname(__file__), "data/eval_dataset.json")
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 
+EVAL_OUTPUT = {
+    "format" : {
+        "type": "json_schema",
+        "schema" : {
+            "type" : "object",
+            "properties": {
+                "verdict": {"type": "string"},
+                "output": {"type": "string"}
+            },
+            "required": ["verdict", "output"],
+            "additionalProperties": False,
+        }
+    }
+}
+
 
 def load_test_cases() -> list[EvalTestCase]:
     with open(DATASET_PATH) as f:
@@ -35,9 +50,17 @@ def load_test_cases() -> list[EvalTestCase]:
 
 
 def evaluate_case(tc: EvalTestCase) -> EvalResult:
-    prompt = f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location for ground-mounted solar panels? Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return"
-    output, iterations, tool_error = run(prompt, tool_registry=EVAL_TOOLS)
-    verdict = next((v for v in ["BAD", "MARGINAL", "GOOD"] if v in output), None)
+    prompt = (
+    f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location "
+    f"for ground-mounted solar panels? Use the available tools to assess the location. "
+    f"Base your verdict solely on the data the tools return — do not factor in general "
+    f"knowledge about the location, land use, or regulations."
+    f"Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return."
+)
+
+    output, iterations, tool_error = run(prompt, tool_registry=EVAL_TOOLS, output_config=EVAL_OUTPUT)
+    verdict = output.get("verdict", "Failed to output verdict")
+
     return EvalResult(
         test_case=tc,
         actual_verdict=verdict,
