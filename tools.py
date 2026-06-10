@@ -62,11 +62,12 @@ def web_fetch(url: str) -> ToolResponse:
 def get_terrain_data(lat: float, lon: float) -> ToolResponse:
     """Retrieve terrain elevation data for a given coordinate.
     The input should be two floats: latitude, longitude. For example: 51.5074, -0.1278 for London.
-    Returns elevation in metres above sea level from the SRTM GL1 30m dataset.
+    Returns elevation in metres above sea level. Uses SRTM GL1 (30m) for latitudes within ±60°, COP30 beyond.
     """
     offset = 0.01
+    demtype = "SRTMGL1" if -60 <= lat <= 60 else "COP30"
     params = {
-        "demtype": "SRTMGL1",
+        "demtype": demtype,
         "south": lat - offset,
         "north": lat + offset,
         "west": lon - offset,
@@ -113,7 +114,7 @@ def get_terrain_data(lat: float, lon: float) -> ToolResponse:
         cellsize_ew = cellsize_deg * 111320 * np.cos(np.radians(lat))
         dy, dx = np.gradient(grid, cellsize_ns, cellsize_ew)
         slope = round(float(np.degrees(np.arctan(np.sqrt(dx[cy, cx]**2 + dy[cy, cx]**2)))), 1)
-        if slope < 1.0:
+        if slope <= 10.0:
             return slope, None
         aspect_deg = float(np.degrees(np.arctan2(dx[cy, cx], -dy[cy, cx]))) % 360
         aspect = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][round(aspect_deg / 45) % 8]
@@ -129,7 +130,7 @@ def get_terrain_data(lat: float, lon: float) -> ToolResponse:
         "longitude": lon,
         "elevation_m": elevation,
         "slope_degrees": slope,
-        "dataset": "SRTM GL1 (30m resolution)",
+        "dataset": f"{'SRTM GL1 (30m resolution)' if demtype == 'SRTMGL1' else 'COP30 (30m resolution)'}",
     }
     if aspect is not None:
         result["aspect"] = aspect
