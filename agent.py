@@ -44,8 +44,7 @@ class Agent:
             
             Your response should be in the following format:
             Thought: <your reasoning about what to do next>
-            Tool Call: <the name of the tool you want to call, or leave blank if you want to output a final answer>
-            Tool Args: <the arguments to the tool, or leave blank if not calling a tool, output as a JSON object e.g. {{"lat": 51.5074, "lon": -0.1278}}>
+            Tool Calls: <JSON array of tools to call, e.g. [{{"name": "tool_name", "args": {{"lat": 51.5074, "lon": -0.1278}}}}]. Leave blank if not calling any tools. You may call multiple tools in one step if they are independent.>
             Output: <final answer if you have completed the task, otherwise leave blank>
         """
         self.observe_prompt: str = """
@@ -113,27 +112,24 @@ class Agent:
         return line.replace("**", "").replace("`", "").strip()
 
     def _parse_act_response(self, raw: str) -> AgentResponse:
-        thought = tool_call = tool_args = output = None
+        thought = output = None
+        tool_calls = []
         for line in raw.splitlines():
             line = self._clean_line(line)
             if line.startswith("Thought:"):
                 thought = line.removeprefix("Thought:").strip()
-            elif line.startswith("Tool Call:"):
-                value = line.removeprefix("Tool Call:").strip()
-                if value:
-                    tool_call = value
-            elif line.startswith("Tool Args:"):
-                value = line.removeprefix("Tool Args:").strip()
+            elif line.startswith("Tool Calls:"):
+                value = line.removeprefix("Tool Calls:").strip()
                 if value:
                     try:
-                        tool_args = json.loads(value)
+                        tool_calls = json.loads(value)
                     except json.JSONDecodeError:
-                        tool_args = value
+                        pass
             elif line.startswith("Output:"):
                 value = line.removeprefix("Output:").strip()
                 if value:
                     output = value
-        return AgentResponse(thought=thought, tool_call=tool_call, tool_args=tool_args, output=output)
+        return AgentResponse(thought=thought, tool_calls=tool_calls, output=output)
 
     def act(self, message: str) -> AgentResponse:
         print(f"\n[act] task: {message}")

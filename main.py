@@ -1,5 +1,6 @@
 import sys
 from agent import Agent
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from langfuse import get_client
 
 
@@ -17,12 +18,20 @@ def run(task: str, tool_registry: dict | None = None, output_config: dict | None
         for iterations in range(1, max_iterations + 1):
             response = agent.act(task)
 
-            if response.tool_call:
-                tool_result = agent.call_tool(response.tool_call, response.tool_args)
-                print(f"Tool Response: {tool_result}")
-                if any(e in tool_result.lower() for e in _TOOL_ERROR_STRINGS):
-                    tool_error = True
-                agent.observe(tool_result)
+            if response.tool_calls:
+                with ThreadPoolExecutor() as executor:
+                    futures = {executor.submit(agent.call_tool, tc["name"], tc["args"]): tc["name"] for tc in response.tool_calls}
+                    tool_results = []
+                    for future in as_completed(futures):
+                        result = future.result()
+                        tool_results.append(result)
+                        if any(e in result.lower() for e in _TOOL_ERROR_STRINGS):
+                            tool_error = True
+
+                combined = "\n\n".join(tool_results)
+                print(f"Tool Response: {combined}")
+                agent.observe(combined)
+
             else:
                 agent.observe(response.thought or "")
 
@@ -31,6 +40,7 @@ def run(task: str, tool_registry: dict | None = None, output_config: dict | None
             if "task_complete: yes" in reflection.lower():
                 final_output = agent.output()
                 break
+        
         else:
             final_output = agent.output()
 

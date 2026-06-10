@@ -1,8 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class AgentResponse:
     thought: str
-    tool_call: str | None
-    tool_args: str | None
+    tool_calls: list[dict]
     output: str | None
