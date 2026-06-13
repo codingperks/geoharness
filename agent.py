@@ -1,7 +1,12 @@
+import asyncio
 import inspect
 import json
 
+from mcp import ClientSession
+from mcp.client.streamable_http import streamable_http_client
+
 from models.agents import AgentResponse
+from models.tools import ToolResponse
 from llm import send_message
 import tools
 
@@ -26,7 +31,7 @@ class Agent:
     ReAct agent: observe -> reflect -> act -> observe -> reflect -> act etc. 
     """
     
-    def __init__(self, name: str, tool_registry: dict | None = None, output_config: dict | None = None):
+    def __init__(self, name: str, tool_registry: dict | None = None, output_config: dict | None = None, mcp_uri: str | None = None):
         self.name: str = name
         self.task: str = ""
         self.act_prompt: str = """
@@ -97,9 +102,38 @@ class Agent:
             Is the task complete? <yes/no>
         """
         self.history: list[str] = []
-        self.tool_registry: dict = tool_registry if tool_registry is not None else tools.REGISTRY
+        self.tool_registry: dict = self._setup_tool_registry(tool_registry=tool_registry, mcp_uri=mcp_uri)
         self.output_config: dict = output_config if output_config is not None else _DEFAULT_OUTPUT_CONFIG
         
+    def _setup_tool_registry(self, tool_registry: dict | None = None, mcp_uri: str | None = None) -> dict:
+        if mcp_uri:
+            async def _list_tools():
+                async with streamable_http_client(mcp_uri) as (read, write, _):
+                    async with ClientSession(read, write) as session:
+                        await session.initialize()
+                        return await session.list_tools()
+
+            def _make_tool_fn(name: str):
+                def call(**kwargs):
+                    async def _call_tool():
+                        async with streamable_http_client(mcp_uri) as (read, write, _):
+                            async with ClientSession(read, write) as session:
+                                await session.initialize()
+                                return await session.call_tool(name, kwargs)
+                    result = asyncio.run(_call_tool())
+                    return ToolResponse(output=result.content[0].text)
+                return call
+
+            mcp_tools = asyncio.run(_list_tools()).tools
+            return {
+                t.name: (_make_tool_fn(t.name), t.description, list(t.inputSchema["properties"].keys()))
+                for t in mcp_tools
+            }
+        elif tool_registry:
+            return tool_registry
+        else:
+            raise Exception("No tool registry provided")
+            
     def observe(self, observation: str) -> str:
         print(f"\n[observe] input: {observation}")
         response = send_message(self.observe_prompt.format(task=self.task, history="\n".join(self.history), observation=observation), name="observe")
@@ -136,8 +170,8 @@ class Agent:
         if self.task == "":
             self.task = message
         tool_descriptions = "\n".join(
-            f"- {name}: {desc} | params: {list(inspect.signature(fn).parameters.keys())}"
-            for name, (fn, desc) in self.tool_registry.items()
+            f"- {name}: {entry[1]} | params: {entry[2] if len(entry) > 2 else list(inspect.signature(entry[0]).parameters.keys())}"
+            for name, entry in self.tool_registry.items()
         )
         raw = send_message(self.act_prompt.format(task=self.task, history="\n".join(self.history), tools=tool_descriptions), name="act")
         print(f"[act] response: {raw}")
@@ -155,9 +189,10 @@ class Agent:
     def call_tool(self, tool_name: str, tool_args: dict | str | None = None):
         if tool_name not in self.tool_registry:
             raise ValueError(f"Tool '{tool_name}' not found.")
-        fn, _ = self.tool_registry[tool_name]
+        entry = self.tool_registry[tool_name]
+        fn = entry[0]
         if isinstance(tool_args, str):
-            first_param = next(iter(inspect.signature(fn).parameters))
+            first_param = entry[2][0] if len(entry) > 2 else next(iter(inspect.signature(fn).parameters))
             tool_args = {first_param: tool_args}
         tool_call = fn(**(tool_args or {}))
         self.history.append(f"Executed tool '{tool_name}' with args {tool_args}")
