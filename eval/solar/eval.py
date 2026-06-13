@@ -1,6 +1,8 @@
 import json
 import os
+import subprocess
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 
@@ -12,7 +14,10 @@ from models.tools import ClimateData, TerrainData
 import llm
 import tools
 
+PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "../..")
 EVAL_TOOLS = {k: v for k, v in tools.REGISTRY.items() if k in ("get_climate_data", "get_terrain_data")}
+MCP_SERVER_PATH = os.path.join(PROJECT_ROOT, "geo_mcp.py")
+MCP_URI = "http://localhost:8000/mcp"
 
 DATASET_PATH = os.path.join(os.path.dirname(__file__), "data/eval_dataset.json")
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
@@ -49,7 +54,7 @@ def load_test_cases() -> list[EvalTestCase]:
     ]
 
 
-def evaluate_case(tc: EvalTestCase) -> EvalResult:
+def evaluate_case(tc: EvalTestCase, mcp_uri: str | None = None) -> EvalResult:
     prompt = (
     f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location "
     f"for ground-mounted solar panels? Use the available tools to assess the location. "
@@ -58,7 +63,12 @@ def evaluate_case(tc: EvalTestCase) -> EvalResult:
     f"Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return."
 )
 
-    output, iterations, tool_error = run(prompt, tool_registry=EVAL_TOOLS, output_config=EVAL_OUTPUT)
+    output, iterations, tool_error = run(
+        prompt,
+        tool_registry=None if mcp_uri else EVAL_TOOLS,
+        output_config=EVAL_OUTPUT,
+        mcp_uri=mcp_uri,
+    )
     verdict = output.get("verdict", "Failed to output verdict")
 
     return EvalResult(
@@ -73,13 +83,28 @@ def evaluate_case(tc: EvalTestCase) -> EvalResult:
     )
     
     
-def evaluate():
+def evaluate(use_mcp: bool = False):
     test_cases: list[EvalTestCase] = load_test_cases()
     results: list[EvalResult] = []
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        futures = {executor.submit(evaluate_case, tc): tc for tc in test_cases}
-        for future in as_completed(futures):
-            results.append(future.result())
+
+    mcp_proc = None
+    mcp_uri = None
+    if use_mcp:
+        mcp_proc = subprocess.Popen(
+            ["uv", "run", MCP_SERVER_PATH],
+            cwd=PROJECT_ROOT,
+        )
+        time.sleep(2)
+        mcp_uri = MCP_URI
+
+    try:
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            futures = {executor.submit(evaluate_case, tc, mcp_uri): tc for tc in test_cases}
+            for future in as_completed(futures):
+                results.append(future.result())
+    finally:
+        if mcp_proc:
+            mcp_proc.terminate()
     
     passed = sum(r.passed for r in results)
     print(f"\n{'═' * 60}")
@@ -106,6 +131,7 @@ def evaluate():
                     "iterations": r.iterations,
                     "tool_error": r.tool_error,
                     "output": r.output,
+                    "mcp": use_mcp
                 }
                 for r in results
             ],
@@ -117,4 +143,4 @@ def evaluate():
 
 
 if __name__ == "__main__":
-    evaluate()
+    evaluate(use_mcp="--mcp" in sys.argv)
