@@ -6,6 +6,10 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 
+import httpx
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), "../../.env"))
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../.."))
 
 from main import run
@@ -54,6 +58,20 @@ def load_test_cases() -> list[EvalTestCase]:
     ]
 
 
+_AGENT_STEPS = {"act", "observe", "reflect", "output"}
+_LANGFUSE_HOST = os.getenv("LANGFUSE_HOST", "https://cloud.langfuse.com")
+_LANGFUSE_AUTH = (os.getenv("LANGFUSE_PUBLIC_KEY"), os.getenv("LANGFUSE_SECRET_KEY"))
+
+def fetch_trace_steps(trace_id: str) -> list[dict]:
+    observations = httpx.get(
+        f"{_LANGFUSE_HOST}/api/public/traces/{trace_id}",
+        auth=_LANGFUSE_AUTH,
+    ).json().get("observations", [])
+    steps = [o for o in observations if o.get("name") in _AGENT_STEPS]
+    ordered = sorted(steps, key=lambda o: o.get("startTime", ""))
+    return [{"type": o["name"], "prompt": o.get("input") or "", "content": o.get("output") or ""} for o in ordered]
+
+
 def evaluate_case(tc: EvalTestCase, mcp_uri: str | None = None) -> EvalResult:
     prompt = (
     f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location "
@@ -81,6 +99,7 @@ def evaluate_case(tc: EvalTestCase, mcp_uri: str | None = None) -> EvalResult:
         iterations=iterations,
         tool_error=tool_error,
         trace_id=trace_id,
+        steps=[],
     )
     
     
@@ -106,7 +125,12 @@ def evaluate(use_mcp: bool = False):
     finally:
         if mcp_proc:
             mcp_proc.terminate()
-    
+
+    print("Fetching trace steps from Langfuse...")
+    for r in results:
+        if r.trace_id:
+            r.steps = fetch_trace_steps(r.trace_id)
+
     passed = sum(r.passed for r in results)
     print(f"\n{'═' * 60}")
     print(f"  Results: {passed}/{len(results)} passed")
@@ -134,6 +158,7 @@ def evaluate(use_mcp: bool = False):
                     "output": r.output,
                     "mcp": use_mcp,
                     "trace_id": r.trace_id,
+                    "steps": r.steps,
                 }
                 for r in results
             ],
