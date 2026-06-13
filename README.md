@@ -95,7 +95,7 @@ Each agent run is traced end-to-end using [Langfuse](https://langfuse.com). The 
 
 ## Frontend
 
-A static frontend displays the eval results with the full agent reasoning trace per location. Built with vanilla HTML/JS — no framework, no build step.
+A static frontend displays the eval results with the full agent reasoning trace per location. Built with vanilla HTML/JS.
 
 ```bash
 # develop locally
