@@ -8,11 +8,27 @@
 </head>
 <body>
   <header>
-    <h1>GeoHarness</h1>
-    <p>Evaluating how a single ReAct loop deals with geospatial tasks - currently focused on Solar Siting.</p>
+    <div class="header-top">
+      <h1>GeoHarness</h1>
+      <a href="https://github.com/codingperks/geoharness" class="repo-link" target="_blank">View on GitHub</a>
+    </div>
+    <p class="tagline">A minimal ReAct agent evaluating geospatial tasks — currently focused on solar siting.</p>
   </header>
 
   <main>
+    <section class="motivation">
+      <p>
+        Commercial AI products built on graph-based architectures — large sets of tools, planners, prescribed traversals — trade flexibility for reliability. As those graphs grow, they become harder to extend and increasingly constrain what newer models can do.
+      </p>
+      <p>
+        This project tests the alternative: a single ReAct loop (<code>act → observe → reflect</code>) with just two primitive geospatial tools, asking whether a simple agent can reason correctly about complex data without heavy scaffolding.
+      </p>
+      <p>
+        The eval below runs the agent against 11 hand-labelled locations spanning three verdicts — GOOD, MARGINAL, BAD — using only NASA POWER climate data and OpenTopography terrain data. Web search is excluded so the agent must reason from tool data alone, not training knowledge. Current score: <strong>10/11 (91%)</strong>.
+      </p>
+    </section>
+
+    <h2 class="section-title">Eval results</h2>
     <div id="location-list"></div>
   </main>
 
