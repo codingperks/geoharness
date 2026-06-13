@@ -1,15 +1,15 @@
 # Geoharness
 
-A minimal ReAct agent built in pure Python for geospatial tasks — currently focused on solar siting. No frameworks, no graph traversals, no abstractions beyond what the task requires.
+A minimal ReAct agent built in pure Python for geospatial tasks: currently evaluated using solar siting, but not explcitly tuned for solar siting. Built using Python, avoiding frameworks where possible.
 
 **Live demo:** [Here](https://dwom83i5hpgfm.cloudfront.net) — eval results with full agent reasoning traces
 
 A few overarching goals:
-- Understand how basic/unengineered an agent architecture can be whilst still being performant (no strict graph traversals or large tool sets)
-- How well a different modality of data (geospatial) can be handled by LLMs — can an agent answer geospatial questions and understand the context
-- Build a local MCP server for the agent's tools to evaluate the drawbacks and benefits of MCP in practice from the ground up
+- Understand how basic/unengineered an agent architecture can be whilst still being performant (no strict graph traversals or large tool sets).
+- How well a different modality of data (geospatial) can be handled by LLMs — can an agent answer geospatial questions and understand the context.
+- Build a local MCP server for the agent's tools to evaluate the drawbacks and benefits of MCP in practice (e.g. if the MCP communication layer affects performance).
 
-Example target question: *Is this a good coordinate to place solar panels?*
+Current target domain question: *Is this a good coordinate to place solar panels?*
 
 ## Motivation
 
@@ -43,14 +43,28 @@ A single ReAct loop (`act → observe → reflect`) with a small set of primitiv
 The geospatial tools are exposed as an MCP server via [FastMCP](https://github.com/jlowin/fastmcp), making them available to any MCP-compatible client including Claude Code.
 
 ```bash
-# stdio (Claude Code integration — starts automatically via .claude/settings.json)
+# stdio (for Claude Code integration)
 uv run geo_mcp.py
 
 # HTTP (for eval or external clients)
 uv run geo_mcp.py --http
 ```
 
-To use with Claude Code, the server is configured in `.claude/settings.json` and starts automatically when you open the project. You can then ask Claude Code directly: *"Is Seville a good location for solar panels?"* and it will call the tools natively.
+To use with Claude Code, add the following to `.claude/settings.json` in the project root:
+
+```json
+{
+  "mcpServers": {
+    "geoharness": {
+      "command": "uv",
+      "args": ["run", "geo_mcp.py"],
+      "cwd": "/path/to/geoharness"
+    }
+  }
+}
+```
+
+Once configured, the server will start automatically when you open the project. You can then ask Claude Code directly: *"Is Seville a good location for solar panels?"* and it will call the tools natively.
 
 **MCP eval finding:** running the 11-location eval via the MCP path (tools called through the protocol rather than directly) produced the same 10/11 score with the same failure. This confirms the quality is in the tool data, not the custom ReAct prompt tuning.
 
@@ -81,15 +95,16 @@ Results are saved to `eval/solar/results/` with a UTC timestamp per run and incl
 **Required environment variables:**
 ```
 ANTHROPIC_KEY=
+LLM_MODEL=
 LANGFUSE_PUBLIC_KEY=
 LANGFUSE_SECRET_KEY=
-LANGFUSE_HOST=https://cloud.langfuse.com
-OPENTOPOGRAPHY_API_KEY=
+LANGFUSE_BASE_URL=https://cloud.langfuse.com
+OPENTOPOGRAPHY_KEY=
 ```
 
 ## Observability
 
-Each agent run is traced end-to-end using [Langfuse](https://langfuse.com). The full loop appears as a single trace named `Geoharness react`, with each LLM call (`act`, `observe`, `reflect`, `output`) as a labelled child generation — useful for inspecting prompt inputs, model outputs, and token usage at each step.
+Each agent run is traced end-to-end using [Langfuse](https://langfuse.com). The full loop appears as a single trace named `Geoharness react`, with each LLM call (`act`, `observe`, `reflect`, `output`) as a labelled child generation — useful for inspecting prompt inputs, model outputs, and token usage at each step. These traces are also used for collecting outputs for each LLM call, useful for displaying on the demo.
 
 ![Langfuse trace](docs/langfuse-trace.png)
 
