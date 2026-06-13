@@ -179,10 +179,12 @@ main {
 .step[data-type="output"]  .step-label { color: #15803d; }
 
 .step-body {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
+  font-family: inherit;
   white-space: pre-wrap;
   word-break: break-word;
   color: #44403c;
+  line-height: 1.6;
   background: #fafaf9;
   border: 1px solid #e7e5e4;
   border-radius: 4px;
