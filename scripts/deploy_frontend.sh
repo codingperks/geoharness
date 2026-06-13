@@ -13,7 +13,7 @@ if [ -n "$CLOUDFRONT_ID" ]; then
   aws cloudfront create-invalidation \
     --distribution-id $CLOUDFRONT_ID \
     --paths "/*" > /dev/null
-  echo "Done: https://$(aws cloudfront get-distribution --id $CLOUDFRONT_ID --query 'Distribution.DomainName' --output text)"
+  echo "Done (cache invalidation submitted)"
 else
   echo "Done: http://$BUCKET.s3-website-$REGION.amazonaws.com"
   echo "Tip: set CLOUDFRONT_ID in your environment to invalidate cache on deploy"
