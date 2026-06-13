@@ -28,3 +28,4 @@ class EvalResult:
     iterations: int
     tool_error: bool
     trace_id: str | None
+    steps: list[dict]
