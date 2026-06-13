@@ -63,7 +63,7 @@ def evaluate_case(tc: EvalTestCase, mcp_uri: str | None = None) -> EvalResult:
     f"Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return."
 )
 
-    output, iterations, tool_error = run(
+    output, iterations, tool_error, trace_id = run(
         prompt,
         tool_registry=None if mcp_uri else EVAL_TOOLS,
         output_config=EVAL_OUTPUT,
@@ -80,6 +80,7 @@ def evaluate_case(tc: EvalTestCase, mcp_uri: str | None = None) -> EvalResult:
         model=llm.model,
         iterations=iterations,
         tool_error=tool_error,
+        trace_id=trace_id,
     )
     
     
@@ -131,7 +132,8 @@ def evaluate(use_mcp: bool = False):
                     "iterations": r.iterations,
                     "tool_error": r.tool_error,
                     "output": r.output,
-                    "mcp": use_mcp
+                    "mcp": use_mcp,
+                    "trace_id": r.trace_id,
                 }
                 for r in results
             ],

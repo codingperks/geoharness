@@ -27,3 +27,4 @@ class EvalResult:
     model: str
     iterations: int
     tool_error: bool
+    trace_id: str | None
