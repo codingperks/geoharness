@@ -105,14 +105,24 @@ if __name__ == "__main__":
     if len(sys.argv) == 3:
         probe(float(sys.argv[1]), float(sys.argv[2]))
     else:
-        locations_file = os.path.join(os.path.dirname(__file__), "../data/eval_locations.txt")
-        test_cases = [
+        locations_file = sys.argv[1] if len(sys.argv) == 2 else os.path.join(os.path.dirname(__file__), "../data/eval_locations.txt")
+
+        existing = []
+        if os.path.exists(OUTPUT_PATH):
+            with open(OUTPUT_PATH) as f:
+                existing = json.load(f)
+        existing_names = {c["location"]["name"] for c in existing}
+
+        new_cases = [
             tc for tc in (
                 probe(lat, lon, name)
                 for name, lat, lon in parse_locations_file(locations_file)
+                if name not in existing_names
             )
             if tc is not None
         ]
+
+        merged = existing + [asdict(tc) for tc in new_cases]
         with open(OUTPUT_PATH, "w") as f:
-            json.dump([asdict(tc) for tc in test_cases], f, indent=2)
-        print(f"\nDataset saved to {OUTPUT_PATH} ({len(test_cases)} locations)")
+            json.dump(merged, f, indent=2)
+        print(f"\nDataset saved to {OUTPUT_PATH} ({len(new_cases)} new, {len(merged)} total)")

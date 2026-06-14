@@ -691,5 +691,2147 @@
       }
     },
     "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "Tresinwen, Wales",
+      "lat": 52.03,
+      "lon": -5.06,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 0.7118,
+          "FEB": 1.4316,
+          "MAR": 2.701,
+          "APR": 4.2329,
+          "MAY": 5.3633,
+          "JUN": 5.7444,
+          "JUL": 5.1936,
+          "AUG": 4.3229,
+          "SEP": 3.1738,
+          "OCT": 1.7417,
+          "NOV": 0.8638,
+          "DEC": 0.5266,
+          "ANN": 3.007
+        },
+        "clearsky_irradiance": {
+          "JAN": 1.2847,
+          "FEB": 2.4122,
+          "MAR": 4.1266,
+          "APR": 6.0278,
+          "MAY": 7.519,
+          "JUN": 8.1158,
+          "JUL": 7.6826,
+          "AUG": 6.4188,
+          "SEP": 4.6716,
+          "OCT": 2.8553,
+          "NOV": 1.5374,
+          "DEC": 0.9857,
+          "ANN": 4.4786
+        },
+        "temperature_2m": {
+          "JAN": 6.99,
+          "FEB": 6.44,
+          "MAR": 7.05,
+          "APR": 8.83,
+          "MAY": 11.17,
+          "JUN": 13.65,
+          "JUL": 15.31,
+          "AUG": 15.6,
+          "SEP": 14.5,
+          "OCT": 12.43,
+          "NOV": 9.86,
+          "DEC": 7.91,
+          "ANN": 10.84
+        }
+      },
+      "terrain_data": {
+        "latitude": 52.03,
+        "longitude": -5.06,
+        "elevation_m": 3.0,
+        "slope_degrees": 8.1,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Barbury Castle, England",
+      "lat": 51.489,
+      "lon": -1.782,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 0.8366,
+          "FEB": 1.5079,
+          "MAR": 2.6426,
+          "APR": 4.0387,
+          "MAY": 4.8749,
+          "JUN": 5.2968,
+          "JUL": 5.0887,
+          "AUG": 4.1856,
+          "SEP": 3.2347,
+          "OCT": 1.8506,
+          "NOV": 0.9874,
+          "DEC": 0.6619,
+          "ANN": 2.9398
+        },
+        "clearsky_irradiance": {
+          "JAN": 1.4386,
+          "FEB": 2.5618,
+          "MAR": 4.2206,
+          "APR": 6.0413,
+          "MAY": 7.4882,
+          "JUN": 8.0462,
+          "JUL": 7.6272,
+          "AUG": 6.3838,
+          "SEP": 4.7479,
+          "OCT": 2.9774,
+          "NOV": 1.6745,
+          "DEC": 1.1364,
+          "ANN": 4.537
+        },
+        "temperature_2m": {
+          "JAN": 4.03,
+          "FEB": 4.02,
+          "MAR": 5.69,
+          "APR": 8.46,
+          "MAY": 11.67,
+          "JUN": 14.87,
+          "JUL": 17.04,
+          "AUG": 16.64,
+          "SEP": 14.17,
+          "OCT": 10.8,
+          "NOV": 7.01,
+          "DEC": 4.71,
+          "ANN": 9.96
+        }
+      },
+      "terrain_data": {
+        "latitude": 51.489,
+        "longitude": -1.782,
+        "elevation_m": 205.0,
+        "slope_degrees": 7.9,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "Southern Sicily, Italy",
+      "lat": 36.91,
+      "lon": 14.43,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 2.5013,
+          "FEB": 3.3833,
+          "MAR": 4.655,
+          "APR": 5.8718,
+          "MAY": 6.9984,
+          "JUN": 7.6493,
+          "JUL": 7.7059,
+          "AUG": 6.8107,
+          "SEP": 5.2589,
+          "OCT": 3.8078,
+          "NOV": 2.6774,
+          "DEC": 2.2253,
+          "ANN": 4.9697
+        },
+        "clearsky_irradiance": {
+          "JAN": 3.235,
+          "FEB": 4.2852,
+          "MAR": 5.6532,
+          "APR": 6.8698,
+          "MAY": 7.7498,
+          "JUN": 8.1607,
+          "JUL": 7.919,
+          "AUG": 7.0975,
+          "SEP": 5.8814,
+          "OCT": 4.5377,
+          "NOV": 3.4046,
+          "DEC": 2.8733,
+          "ANN": 5.6443
+        },
+        "temperature_2m": {
+          "JAN": 10.54,
+          "FEB": 10.45,
+          "MAR": 12.26,
+          "APR": 14.93,
+          "MAY": 19.01,
+          "JUN": 24.05,
+          "JUL": 27.51,
+          "AUG": 27.6,
+          "SEP": 23.85,
+          "OCT": 20.2,
+          "NOV": 16.02,
+          "DEC": 12.1,
+          "ANN": 18.25
+        }
+      },
+      "terrain_data": {
+        "latitude": 36.91,
+        "longitude": 14.43,
+        "elevation_m": 37.0,
+        "slope_degrees": 2.3,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "GOOD"
+  },
+  {
+    "location": {
+      "name": "Mongolia",
+      "lat": 45.55,
+      "lon": 105.33,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 1.9961,
+          "FEB": 3.1109,
+          "MAR": 4.7419,
+          "APR": 6.077,
+          "MAY": 7.0548,
+          "JUN": 6.9994,
+          "JUL": 6.6238,
+          "AUG": 6.0425,
+          "SEP": 5.0484,
+          "OCT": 3.6521,
+          "NOV": 2.2594,
+          "DEC": 1.6459,
+          "ANN": 4.6102
+        },
+        "clearsky_irradiance": {
+          "JAN": 2.4845,
+          "FEB": 3.7226,
+          "MAR": 5.4084,
+          "APR": 7.0111,
+          "MAY": 8.196,
+          "JUN": 8.333,
+          "JUL": 7.9682,
+          "AUG": 7.0423,
+          "SEP": 5.6705,
+          "OCT": 4.0555,
+          "NOV": 2.6966,
+          "DEC": 2.1149,
+          "ANN": 5.3986
+        },
+        "temperature_2m": {
+          "JAN": -16.81,
+          "FEB": -13.2,
+          "MAR": -3.92,
+          "APR": 4.58,
+          "MAY": 11.6,
+          "JUN": 18.6,
+          "JUL": 21.7,
+          "AUG": 19.07,
+          "SEP": 11.72,
+          "OCT": 2.3,
+          "NOV": -7.05,
+          "DEC": -15.42,
+          "ANN": 2.84
+        }
+      },
+      "terrain_data": {
+        "latitude": 45.55,
+        "longitude": 105.33,
+        "elevation_m": 1369.0,
+        "slope_degrees": 1.6,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "GOOD"
+  },
+  {
+    "location": {
+      "name": "Siberia, Russia",
+      "lat": 66.63,
+      "lon": 153.42,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 0.0828,
+          "FEB": 0.7702,
+          "MAR": 2.5555,
+          "APR": 4.9841,
+          "MAY": 5.7814,
+          "JUN": 5.5699,
+          "JUL": 4.8413,
+          "AUG": 3.6022,
+          "SEP": 2.1055,
+          "OCT": 0.8467,
+          "NOV": 0.1949,
+          "DEC": 0.0086,
+          "ANN": 2.6191
+        },
+        "clearsky_irradiance": {
+          "JAN": 0.107,
+          "FEB": 0.9118,
+          "MAR": 2.8186,
+          "APR": 5.3875,
+          "MAY": 7.0889,
+          "JUN": 7.853,
+          "JUL": 7.057,
+          "AUG": 5.3323,
+          "SEP": 3.234,
+          "OCT": 1.3721,
+          "NOV": 0.2676,
+          "DEC": 0.0091,
+          "ANN": 3.4644
+        },
+        "temperature_2m": {
+          "JAN": -35.32,
+          "FEB": -34.48,
+          "MAR": -23.07,
+          "APR": -10.87,
+          "MAY": 1.31,
+          "JUN": 11.27,
+          "JUL": 14.09,
+          "AUG": 10.56,
+          "SEP": 2.67,
+          "OCT": -11.5,
+          "NOV": -25.21,
+          "DEC": -33.23,
+          "ANN": -11.03
+        }
+      },
+      "terrain_data": {
+        "latitude": 66.63,
+        "longitude": 153.42,
+        "elevation_m": 74.05387115478516,
+        "slope_degrees": 2.3,
+        "aspect": null,
+        "dataset": "COP30 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "West Bengal, India",
+      "lat": 21.912,
+      "lon": 88.468,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 3.8868,
+          "FEB": 4.7311,
+          "MAR": 5.4026,
+          "APR": 5.8154,
+          "MAY": 5.7168,
+          "JUN": 4.4818,
+          "JUL": 4.1902,
+          "AUG": 4.3039,
+          "SEP": 4.507,
+          "OCT": 4.279,
+          "NOV": 4.0894,
+          "DEC": 3.6247,
+          "ANN": 4.583
+        },
+        "clearsky_irradiance": {
+          "JAN": 4.1906,
+          "FEB": 5.093,
+          "MAR": 5.8682,
+          "APR": 6.5429,
+          "MAY": 6.7361,
+          "JUN": 6.6379,
+          "JUL": 6.8585,
+          "AUG": 6.6866,
+          "SEP": 6.1855,
+          "OCT": 5.3698,
+          "NOV": 4.5175,
+          "DEC": 3.9434,
+          "ANN": 5.7211
+        },
+        "temperature_2m": {
+          "JAN": 19.03,
+          "FEB": 23.36,
+          "MAR": 27.78,
+          "APR": 30.01,
+          "MAY": 30.28,
+          "JUN": 29.41,
+          "JUL": 28.59,
+          "AUG": 28.32,
+          "SEP": 28.04,
+          "OCT": 26.93,
+          "NOV": 23.45,
+          "DEC": 19.67,
+          "ANN": 26.24
+        }
+      },
+      "terrain_data": {
+        "latitude": 21.912,
+        "longitude": 88.468,
+        "elevation_m": 3.0,
+        "slope_degrees": 4.2,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "South Australia",
+      "lat": -38.424,
+      "lon": 142.859,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 6.9833,
+          "FEB": 5.9942,
+          "MAR": 4.6798,
+          "APR": 3.2328,
+          "MAY": 2.1838,
+          "JUN": 1.735,
+          "JUL": 1.9058,
+          "AUG": 2.7254,
+          "SEP": 3.9559,
+          "OCT": 5.3258,
+          "NOV": 6.2227,
+          "DEC": 7.0008,
+          "ANN": 4.3222
+        },
+        "clearsky_irradiance": {
+          "JAN": 8.921,
+          "FEB": 7.8266,
+          "MAR": 6.2498,
+          "APR": 4.5209,
+          "MAY": 3.1855,
+          "JUN": 2.5855,
+          "JUL": 2.8488,
+          "AUG": 3.9211,
+          "SEP": 5.5142,
+          "OCT": 7.2274,
+          "NOV": 8.5692,
+          "DEC": 9.2261,
+          "ANN": 5.8747
+        },
+        "temperature_2m": {
+          "JAN": 18.3,
+          "FEB": 18.27,
+          "MAR": 17.18,
+          "APR": 14.78,
+          "MAY": 12.45,
+          "JUN": 10.43,
+          "JUL": 9.84,
+          "AUG": 10.1,
+          "SEP": 11.39,
+          "OCT": 12.95,
+          "NOV": 15.02,
+          "DEC": 16.56,
+          "ANN": 13.92
+        }
+      },
+      "terrain_data": {
+        "latitude": -38.424,
+        "longitude": 142.859,
+        "elevation_m": 96.0,
+        "slope_degrees": 1.2,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "South NZ",
+      "lat": -46.205,
+      "lon": 167.21,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 5.6923,
+          "FEB": 4.7772,
+          "MAR": 3.4584,
+          "APR": 2.1715,
+          "MAY": 1.2763,
+          "JUN": 0.9554,
+          "JUL": 1.1302,
+          "AUG": 1.8811,
+          "SEP": 2.9794,
+          "OCT": 4.3159,
+          "NOV": 5.304,
+          "DEC": 5.9441,
+          "ANN": 3.318
+        },
+        "clearsky_irradiance": {
+          "JAN": 8.7358,
+          "FEB": 7.374,
+          "MAR": 5.4761,
+          "APR": 3.5633,
+          "MAY": 2.1922,
+          "JUN": 1.6282,
+          "JUL": 1.8826,
+          "AUG": 2.9551,
+          "SEP": 4.661,
+          "OCT": 6.665,
+          "NOV": 8.3405,
+          "DEC": 9.1447,
+          "ANN": 5.2092
+        },
+        "temperature_2m": {
+          "JAN": 12.59,
+          "FEB": 12.43,
+          "MAR": 11.21,
+          "APR": 8.99,
+          "MAY": 6.82,
+          "JUN": 4.75,
+          "JUL": 4.2,
+          "AUG": 5.09,
+          "SEP": 6.51,
+          "OCT": 7.69,
+          "NOV": 9.42,
+          "DEC": 11.56,
+          "ANN": 8.42
+        }
+      },
+      "terrain_data": {
+        "latitude": -46.205,
+        "longitude": 167.21,
+        "elevation_m": 231.0,
+        "slope_degrees": 17.2,
+        "aspect": "SE",
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "North NZ",
+      "lat": -35.684,
+      "lon": 174.158,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 6.7459,
+          "FEB": 5.8015,
+          "MAR": 4.7122,
+          "APR": 3.455,
+          "MAY": 2.5229,
+          "JUN": 2.0866,
+          "JUL": 2.263,
+          "AUG": 2.9815,
+          "SEP": 4.091,
+          "OCT": 5.3112,
+          "NOV": 6.1733,
+          "DEC": 6.4246,
+          "ANN": 4.3747
+        },
+        "clearsky_irradiance": {
+          "JAN": 8.7936,
+          "FEB": 7.8312,
+          "MAR": 6.4207,
+          "APR": 4.8194,
+          "MAY": 3.54,
+          "JUN": 2.9587,
+          "JUL": 3.2194,
+          "AUG": 4.2569,
+          "SEP": 5.7374,
+          "OCT": 7.3087,
+          "NOV": 8.5147,
+          "DEC": 9.0125,
+          "ANN": 6.0266
+        },
+        "temperature_2m": {
+          "JAN": 20.08,
+          "FEB": 20.69,
+          "MAR": 19.5,
+          "APR": 17.59,
+          "MAY": 15.54,
+          "JUN": 13.58,
+          "JUL": 12.47,
+          "AUG": 12.58,
+          "SEP": 13.47,
+          "OCT": 14.65,
+          "NOV": 16.4,
+          "DEC": 18.61,
+          "ANN": 16.24
+        }
+      },
+      "terrain_data": {
+        "latitude": -35.684,
+        "longitude": 174.158,
+        "elevation_m": 131.0,
+        "slope_degrees": 7.2,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Antarctic Coast (might not have data for this)",
+      "lat": -69.365,
+      "lon": 30.579,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 7.9344,
+          "FEB": 5.3357,
+          "MAR": 2.7658,
+          "APR": 0.7778,
+          "MAY": 0.0667,
+          "JUN": 0.0,
+          "JUL": 0.0084,
+          "AUG": 0.4092,
+          "SEP": 2.0323,
+          "OCT": 4.4971,
+          "NOV": 7.4815,
+          "DEC": 9.1205,
+          "ANN": 3.3629
+        },
+        "clearsky_irradiance": {
+          "JAN": 9.0307,
+          "FEB": 6.2038,
+          "MAR": 3.1944,
+          "APR": 0.943,
+          "MAY": 0.0701,
+          "JUN": 0.0,
+          "JUL": 0.0096,
+          "AUG": 0.4946,
+          "SEP": 2.2949,
+          "OCT": 5.2241,
+          "NOV": 8.3242,
+          "DEC": 10.0769,
+          "ANN": 3.8146
+        },
+        "temperature_2m": {
+          "JAN": -2.97,
+          "FEB": -5.38,
+          "MAR": -9.56,
+          "APR": -13.66,
+          "MAY": -17.36,
+          "JUN": -19.03,
+          "JUL": -21.35,
+          "AUG": -21.67,
+          "SEP": -21.47,
+          "OCT": -15.37,
+          "NOV": -8.5,
+          "DEC": -4.12,
+          "ANN": -13.41
+        }
+      },
+      "terrain_data": {
+        "latitude": -69.365,
+        "longitude": 30.579,
+        "elevation_m": 35.86581039428711,
+        "slope_degrees": 1.3,
+        "aspect": null,
+        "dataset": "COP30 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Southern Greenland",
+      "lat": 61.192,
+      "lon": -46.943,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 0.3715,
+          "FEB": 1.2989,
+          "MAR": 3.1726,
+          "APR": 5.5068,
+          "MAY": 6.7886,
+          "JUN": 7.2883,
+          "JUL": 6.7315,
+          "AUG": 5.0414,
+          "SEP": 3.1934,
+          "OCT": 1.7268,
+          "NOV": 0.5609,
+          "DEC": 0.1896,
+          "ANN": 3.4985
+        },
+        "clearsky_irradiance": {
+          "JAN": 0.5158,
+          "FEB": 1.633,
+          "MAR": 3.7056,
+          "APR": 6.1999,
+          "MAY": 7.9968,
+          "JUN": 8.6808,
+          "JUL": 8.0652,
+          "AUG": 6.2981,
+          "SEP": 4.1998,
+          "OCT": 2.1521,
+          "NOV": 0.7505,
+          "DEC": 0.2707,
+          "ANN": 4.2168
+        },
+        "temperature_2m": {
+          "JAN": -9.47,
+          "FEB": -9.08,
+          "MAR": -7.87,
+          "APR": -3.58,
+          "MAY": 0.43,
+          "JUN": 4.27,
+          "JUL": 6.35,
+          "AUG": 5.94,
+          "SEP": 2.17,
+          "OCT": -2.03,
+          "NOV": -5.81,
+          "DEC": -8.11,
+          "ANN": -2.2
+        }
+      },
+      "terrain_data": {
+        "latitude": 61.192,
+        "longitude": -46.943,
+        "elevation_m": 901.882080078125,
+        "slope_degrees": 0.9,
+        "aspect": null,
+        "dataset": "COP30 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "South Icleand",
+      "lat": 63.506,
+      "lon": -18.104,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 0.1414,
+          "FEB": 0.6425,
+          "MAR": 1.7254,
+          "APR": 3.2974,
+          "MAY": 4.7417,
+          "JUN": 5.0194,
+          "JUL": 4.5566,
+          "AUG": 3.6655,
+          "SEP": 2.1559,
+          "OCT": 0.965,
+          "NOV": 0.2434,
+          "DEC": 0.065,
+          "ANN": 2.2759
+        },
+        "clearsky_irradiance": {
+          "JAN": 0.2779,
+          "FEB": 1.1976,
+          "MAR": 3.0545,
+          "APR": 5.3806,
+          "MAY": 7.3932,
+          "JUN": 8.2032,
+          "JUL": 7.5252,
+          "AUG": 5.784,
+          "SEP": 3.6413,
+          "OCT": 1.6934,
+          "NOV": 0.4692,
+          "DEC": 0.1099,
+          "ANN": 3.739
+        },
+        "temperature_2m": {
+          "JAN": 1.7,
+          "FEB": 1.73,
+          "MAR": 2.04,
+          "APR": 3.72,
+          "MAY": 5.86,
+          "JUN": 8.77,
+          "JUL": 10.44,
+          "AUG": 10.27,
+          "SEP": 8.24,
+          "OCT": 5.29,
+          "NOV": 3.06,
+          "DEC": 1.8,
+          "ANN": 5.26
+        }
+      },
+      "terrain_data": {
+        "latitude": 63.506,
+        "longitude": -18.104,
+        "elevation_m": 8.992083549499512,
+        "slope_degrees": 2.7,
+        "aspect": null,
+        "dataset": "COP30 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "North Iceland",
+      "lat": 66.019,
+      "lon": -18.858,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 0.0499,
+          "FEB": 0.3806,
+          "MAR": 1.2701,
+          "APR": 2.737,
+          "MAY": 4.1407,
+          "JUN": 4.908,
+          "JUL": 4.1539,
+          "AUG": 3.0854,
+          "SEP": 1.7318,
+          "OCT": 0.6238,
+          "NOV": 0.1075,
+          "DEC": 0.0043,
+          "ANN": 1.9397
+        },
+        "clearsky_irradiance": {
+          "JAN": 0.0989,
+          "FEB": 0.834,
+          "MAR": 2.6023,
+          "APR": 4.9678,
+          "MAY": 7.0882,
+          "JUN": 8.0443,
+          "JUL": 7.3411,
+          "AUG": 5.4629,
+          "SEP": 3.2441,
+          "OCT": 1.3066,
+          "NOV": 0.2323,
+          "DEC": 0.0072,
+          "ANN": 3.4478
+        },
+        "temperature_2m": {
+          "JAN": -2.82,
+          "FEB": -2.89,
+          "MAR": -2.49,
+          "APR": -0.76,
+          "MAY": 1.67,
+          "JUN": 6.59,
+          "JUL": 8.61,
+          "AUG": 8.08,
+          "SEP": 5.26,
+          "OCT": 1.43,
+          "NOV": -1.33,
+          "DEC": -2.57,
+          "ANN": 1.59
+        }
+      },
+      "terrain_data": {
+        "latitude": 66.019,
+        "longitude": -18.858,
+        "elevation_m": 433.3072204589844,
+        "slope_degrees": 13.5,
+        "aspect": "W",
+        "dataset": "COP30 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "Central Georgia",
+      "lat": 42.081,
+      "lon": 43.663,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 1.6322,
+          "FEB": 2.4415,
+          "MAR": 3.2376,
+          "APR": 4.2504,
+          "MAY": 5.2027,
+          "JUN": 5.9136,
+          "JUL": 5.8747,
+          "AUG": 5.5543,
+          "SEP": 4.3802,
+          "OCT": 2.9782,
+          "NOV": 1.9498,
+          "DEC": 1.4784,
+          "ANN": 3.7466
+        },
+        "clearsky_irradiance": {
+          "JAN": 2.683,
+          "FEB": 3.8647,
+          "MAR": 5.4257,
+          "APR": 6.9622,
+          "MAY": 7.9874,
+          "JUN": 8.3218,
+          "JUL": 7.9236,
+          "AUG": 7.0022,
+          "SEP": 5.7036,
+          "OCT": 4.1779,
+          "NOV": 2.9141,
+          "DEC": 2.3338,
+          "ANN": 5.4478
+        },
+        "temperature_2m": {
+          "JAN": -1.87,
+          "FEB": -0.36,
+          "MAR": 3.54,
+          "APR": 8.13,
+          "MAY": 13.81,
+          "JUN": 18.59,
+          "JUL": 21.96,
+          "AUG": 22.34,
+          "SEP": 17.43,
+          "OCT": 11.47,
+          "NOV": 4.84,
+          "DEC": -0.32,
+          "ANN": 10.02
+        }
+      },
+      "terrain_data": {
+        "latitude": 42.081,
+        "longitude": 43.663,
+        "elevation_m": 757.0,
+        "slope_degrees": 5.9,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Baja US",
+      "lat": 25.847,
+      "lon": -111.59,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 4.3536,
+          "FEB": 5.2853,
+          "MAR": 6.5208,
+          "APR": 7.374,
+          "MAY": 7.9954,
+          "JUN": 7.938,
+          "JUL": 7.3375,
+          "AUG": 6.7656,
+          "SEP": 6.0814,
+          "OCT": 5.555,
+          "NOV": 4.6402,
+          "DEC": 4.0721,
+          "ANN": 6.1627
+        },
+        "clearsky_irradiance": {
+          "JAN": 4.8924,
+          "FEB": 5.8831,
+          "MAR": 7.0649,
+          "APR": 7.9289,
+          "MAY": 8.3254,
+          "JUN": 8.1751,
+          "JUL": 7.8497,
+          "AUG": 7.4357,
+          "SEP": 6.7495,
+          "OCT": 5.9306,
+          "NOV": 5.01,
+          "DEC": 4.5619,
+          "ANN": 6.653
+        },
+        "temperature_2m": {
+          "JAN": 16.46,
+          "FEB": 17.2,
+          "MAR": 19.11,
+          "APR": 20.76,
+          "MAY": 22.85,
+          "JUN": 26.32,
+          "JUL": 28.78,
+          "AUG": 29.36,
+          "SEP": 28.18,
+          "OCT": 24.49,
+          "NOV": 20.37,
+          "DEC": 16.38,
+          "ANN": 22.55
+        }
+      },
+      "terrain_data": {
+        "latitude": 25.847,
+        "longitude": -111.59,
+        "elevation_m": 711.0,
+        "slope_degrees": 5.0,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "GOOD"
+  },
+  {
+    "location": {
+      "name": "Oaxaca, Mexico",
+      "lat": 16.596,
+      "lon": -97.175,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 5.3714,
+          "FEB": 6.0684,
+          "MAR": 6.707,
+          "APR": 6.889,
+          "MAY": 6.049,
+          "JUN": 5.431,
+          "JUL": 5.8162,
+          "AUG": 5.6206,
+          "SEP": 5.0746,
+          "OCT": 5.203,
+          "NOV": 5.3654,
+          "DEC": 5.2114,
+          "ANN": 5.7317
+        },
+        "clearsky_irradiance": {
+          "JAN": 5.8178,
+          "FEB": 6.5419,
+          "MAR": 7.2571,
+          "APR": 7.4777,
+          "MAY": 7.3258,
+          "JUN": 7.6133,
+          "JUL": 7.6138,
+          "AUG": 7.5072,
+          "SEP": 7.1321,
+          "OCT": 6.5546,
+          "NOV": 5.9302,
+          "DEC": 5.5718,
+          "ANN": 6.8623
+        },
+        "temperature_2m": {
+          "JAN": 16.49,
+          "FEB": 18.05,
+          "MAR": 19.73,
+          "APR": 21.67,
+          "MAY": 21.76,
+          "JUN": 19.96,
+          "JUL": 19.45,
+          "AUG": 19.42,
+          "SEP": 18.91,
+          "OCT": 18.4,
+          "NOV": 17.05,
+          "DEC": 16.53,
+          "ANN": 18.95
+        }
+      },
+      "terrain_data": {
+        "latitude": 16.596,
+        "longitude": -97.175,
+        "elevation_m": 2006.0,
+        "slope_degrees": 22.8,
+        "aspect": "N",
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "Honolulu",
+      "lat": 21.57,
+      "lon": -158.023,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 4.4297,
+          "FEB": 5.0093,
+          "MAR": 5.6686,
+          "APR": 6.4968,
+          "MAY": 6.9514,
+          "JUN": 7.1546,
+          "JUL": 7.1244,
+          "AUG": 6.8575,
+          "SEP": 6.3583,
+          "OCT": 5.3326,
+          "NOV": 4.5185,
+          "DEC": 4.0889,
+          "ANN": 5.8356
+        },
+        "clearsky_irradiance": {
+          "JAN": 5.1648,
+          "FEB": 5.9899,
+          "MAR": 6.9086,
+          "APR": 7.5662,
+          "MAY": 7.8948,
+          "JUN": 8.0066,
+          "JUL": 7.9258,
+          "AUG": 7.6562,
+          "SEP": 7.074,
+          "OCT": 6.1524,
+          "NOV": 5.2771,
+          "DEC": 4.831,
+          "ANN": 6.7063
+        },
+        "temperature_2m": {
+          "JAN": 23.02,
+          "FEB": 22.67,
+          "MAR": 22.88,
+          "APR": 23.6,
+          "MAY": 24.57,
+          "JUN": 25.36,
+          "JUL": 25.91,
+          "AUG": 26.28,
+          "SEP": 26.38,
+          "OCT": 25.91,
+          "NOV": 24.86,
+          "DEC": 23.7,
+          "ANN": 24.61
+        }
+      },
+      "terrain_data": {
+        "latitude": 21.57,
+        "longitude": -158.023,
+        "elevation_m": 341.0,
+        "slope_degrees": 12.8,
+        "aspect": "N",
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "Hawaii",
+      "lat": 19.596,
+      "lon": -155.644,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 4.44,
+          "FEB": 4.8348,
+          "MAR": 5.1756,
+          "APR": 5.6518,
+          "MAY": 5.874,
+          "JUN": 6.0746,
+          "JUL": 6.197,
+          "AUG": 6.0804,
+          "SEP": 5.5997,
+          "OCT": 5.0018,
+          "NOV": 4.3627,
+          "DEC": 4.0464,
+          "ANN": 5.28
+        },
+        "clearsky_irradiance": {
+          "JAN": 5.6446,
+          "FEB": 6.4498,
+          "MAR": 7.2962,
+          "APR": 7.9222,
+          "MAY": 8.1775,
+          "JUN": 8.2483,
+          "JUL": 8.1886,
+          "AUG": 7.9661,
+          "SEP": 7.4402,
+          "OCT": 6.5892,
+          "NOV": 5.7329,
+          "DEC": 5.3028,
+          "ANN": 7.0819
+        },
+        "temperature_2m": {
+          "JAN": 16.37,
+          "FEB": 16.27,
+          "MAR": 16.76,
+          "APR": 17.46,
+          "MAY": 18.37,
+          "JUN": 19.04,
+          "JUL": 19.7,
+          "AUG": 20.05,
+          "SEP": 19.75,
+          "OCT": 19.27,
+          "NOV": 18.08,
+          "DEC": 16.89,
+          "ANN": 18.18
+        }
+      },
+      "terrain_data": {
+        "latitude": 19.596,
+        "longitude": -155.644,
+        "elevation_m": 2348.0,
+        "slope_degrees": 5.4,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Samoa",
+      "lat": -13.491,
+      "lon": -172.576,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 5.5438,
+          "FEB": 5.4446,
+          "MAR": 5.5778,
+          "APR": 5.0383,
+          "MAY": 4.511,
+          "JUN": 4.2324,
+          "JUL": 4.38,
+          "AUG": 5.0772,
+          "SEP": 5.676,
+          "OCT": 5.981,
+          "NOV": 5.8694,
+          "DEC": 5.7002,
+          "ANN": 5.2517
+        },
+        "clearsky_irradiance": {
+          "JAN": 7.9442,
+          "FEB": 7.783,
+          "MAR": 7.2948,
+          "APR": 6.4956,
+          "MAY": 5.7113,
+          "JUN": 5.305,
+          "JUL": 5.5147,
+          "AUG": 6.204,
+          "SEP": 6.9953,
+          "OCT": 7.5778,
+          "NOV": 7.8571,
+          "DEC": 7.9332,
+          "ANN": 6.8803
+        },
+        "temperature_2m": {
+          "JAN": 27.87,
+          "FEB": 27.84,
+          "MAR": 27.91,
+          "APR": 28.04,
+          "MAY": 27.89,
+          "JUN": 27.53,
+          "JUL": 27.04,
+          "AUG": 26.98,
+          "SEP": 27.26,
+          "OCT": 27.51,
+          "NOV": 27.67,
+          "DEC": 27.75,
+          "ANN": 27.61
+        }
+      },
+      "terrain_data": {
+        "latitude": -13.491,
+        "longitude": -172.576,
+        "elevation_m": 21.0,
+        "slope_degrees": 2.9,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Southern South Africa",
+      "lat": -34.79,
+      "lon": 19.65,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 7.6339,
+          "FEB": 6.7865,
+          "MAR": 5.5099,
+          "APR": 4.0685,
+          "MAY": 2.9698,
+          "JUN": 2.497,
+          "JUL": 2.7581,
+          "AUG": 3.5522,
+          "SEP": 4.7993,
+          "OCT": 6.0806,
+          "NOV": 7.2206,
+          "DEC": 7.7813,
+          "ANN": 5.131
+        },
+        "clearsky_irradiance": {
+          "JAN": 8.9414,
+          "FEB": 7.9987,
+          "MAR": 6.5618,
+          "APR": 4.9574,
+          "MAY": 3.6691,
+          "JUN": 3.101,
+          "JUL": 3.3739,
+          "AUG": 4.4232,
+          "SEP": 5.909,
+          "OCT": 7.4664,
+          "NOV": 8.6964,
+          "DEC": 9.1999,
+          "ANN": 6.1836
+        },
+        "temperature_2m": {
+          "JAN": 20.22,
+          "FEB": 20.57,
+          "MAR": 19.81,
+          "APR": 18.31,
+          "MAY": 17.15,
+          "JUN": 15.94,
+          "JUL": 15.32,
+          "AUG": 15.01,
+          "SEP": 15.48,
+          "OCT": 16.48,
+          "NOV": 17.59,
+          "DEC": 19.22,
+          "ANN": 17.58
+        }
+      },
+      "terrain_data": {
+        "latitude": -34.79,
+        "longitude": 19.65,
+        "elevation_m": 2.0,
+        "slope_degrees": 1.1,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "GOOD"
+  },
+  {
+    "location": {
+      "name": "South Argentina",
+      "lat": -54.888,
+      "lon": -65.432,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 5.2219,
+          "FEB": 4.2559,
+          "MAR": 2.8438,
+          "APR": 1.5415,
+          "MAY": 0.7426,
+          "JUN": 0.4411,
+          "JUL": 0.5671,
+          "AUG": 1.2115,
+          "SEP": 2.3801,
+          "OCT": 3.8926,
+          "NOV": 5.1326,
+          "DEC": 5.7538,
+          "ANN": 2.8262
+        },
+        "clearsky_irradiance": {
+          "JAN": 8.5961,
+          "FEB": 6.8702,
+          "MAR": 4.651,
+          "APR": 2.598,
+          "MAY": 1.2732,
+          "JUN": 0.7747,
+          "JUL": 1.0118,
+          "AUG": 2.0513,
+          "SEP": 3.8724,
+          "OCT": 6.145,
+          "NOV": 8.1859,
+          "DEC": 9.1716,
+          "ANN": 4.5912
+        },
+        "temperature_2m": {
+          "JAN": 8.28,
+          "FEB": 8.51,
+          "MAR": 7.88,
+          "APR": 6.3,
+          "MAY": 4.92,
+          "JUN": 3.45,
+          "JUL": 2.97,
+          "AUG": 3.18,
+          "SEP": 4.09,
+          "OCT": 5.28,
+          "NOV": 6.28,
+          "DEC": 7.4,
+          "ANN": 5.7
+        }
+      },
+      "terrain_data": {
+        "latitude": -54.888,
+        "longitude": -65.432,
+        "elevation_m": 0.0,
+        "slope_degrees": 0.0,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "Uruguay",
+      "lat": -33.125,
+      "lon": -55.816,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 7.2653,
+          "FEB": 6.2117,
+          "MAR": 5.2738,
+          "APR": 3.9552,
+          "MAY": 2.7821,
+          "JUN": 2.3345,
+          "JUL": 2.5152,
+          "AUG": 3.2688,
+          "SEP": 4.4016,
+          "OCT": 5.5937,
+          "NOV": 6.9036,
+          "DEC": 7.4246,
+          "ANN": 4.8218
+        },
+        "clearsky_irradiance": {
+          "JAN": 8.8003,
+          "FEB": 7.8838,
+          "MAR": 6.5832,
+          "APR": 5.035,
+          "MAY": 3.7824,
+          "JUN": 3.1831,
+          "JUL": 3.4483,
+          "AUG": 4.4194,
+          "SEP": 5.9182,
+          "OCT": 7.4647,
+          "NOV": 8.6482,
+          "DEC": 9.1154,
+          "ANN": 6.1829
+        },
+        "temperature_2m": {
+          "JAN": 23.1,
+          "FEB": 22.43,
+          "MAR": 20.33,
+          "APR": 16.88,
+          "MAY": 13.2,
+          "JUN": 10.55,
+          "JUL": 9.8,
+          "AUG": 11.53,
+          "SEP": 13.26,
+          "OCT": 16.2,
+          "NOV": 18.86,
+          "DEC": 21.21,
+          "ANN": 16.42
+        }
+      },
+      "terrain_data": {
+        "latitude": -33.125,
+        "longitude": -55.816,
+        "elevation_m": 151.0,
+        "slope_degrees": 4.6,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Portland, US",
+      "lat": 45.022,
+      "lon": -122.893,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 1.2005,
+          "FEB": 2.0686,
+          "MAR": 2.989,
+          "APR": 4.2996,
+          "MAY": 5.4437,
+          "JUN": 6.001,
+          "JUL": 6.8246,
+          "AUG": 5.8159,
+          "SEP": 4.3037,
+          "OCT": 2.591,
+          "NOV": 1.4028,
+          "DEC": 0.984,
+          "ANN": 3.6686
+        },
+        "clearsky_irradiance": {
+          "JAN": 2.2394,
+          "FEB": 3.4459,
+          "MAR": 5.101,
+          "APR": 6.7932,
+          "MAY": 7.997,
+          "JUN": 8.544,
+          "JUL": 8.2243,
+          "AUG": 7.05,
+          "SEP": 5.508,
+          "OCT": 3.8623,
+          "NOV": 2.4929,
+          "DEC": 1.8984,
+          "ANN": 5.2704
+        },
+        "temperature_2m": {
+          "JAN": 4.82,
+          "FEB": 5.12,
+          "MAR": 6.96,
+          "APR": 8.92,
+          "MAY": 12.33,
+          "JUN": 14.84,
+          "JUL": 18.06,
+          "AUG": 18.62,
+          "SEP": 16.17,
+          "OCT": 11.39,
+          "NOV": 6.96,
+          "DEC": 4.18,
+          "ANN": 10.73
+        }
+      },
+      "terrain_data": {
+        "latitude": 45.022,
+        "longitude": -122.893,
+        "elevation_m": 55.0,
+        "slope_degrees": 4.5,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Idaho Craters, US",
+      "lat": 43.164,
+      "lon": -113.5,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 1.8694,
+          "FEB": 2.8073,
+          "MAR": 4.0298,
+          "APR": 5.3556,
+          "MAY": 6.4932,
+          "JUN": 7.457,
+          "JUL": 7.6006,
+          "AUG": 6.547,
+          "SEP": 5.1581,
+          "OCT": 3.5278,
+          "NOV": 2.1554,
+          "DEC": 1.5,
+          "ANN": 4.5494
+        },
+        "clearsky_irradiance": {
+          "JAN": 2.7386,
+          "FEB": 4.0051,
+          "MAR": 5.6429,
+          "APR": 7.2958,
+          "MAY": 8.4511,
+          "JUN": 8.9369,
+          "JUL": 8.5222,
+          "AUG": 7.4184,
+          "SEP": 5.9849,
+          "OCT": 4.3459,
+          "NOV": 2.9616,
+          "DEC": 2.3419,
+          "ANN": 5.7271
+        },
+        "temperature_2m": {
+          "JAN": -4.87,
+          "FEB": -1.77,
+          "MAR": 3.4,
+          "APR": 7.36,
+          "MAY": 13.13,
+          "JUN": 18.71,
+          "JUL": 25.17,
+          "AUG": 23.69,
+          "SEP": 17.49,
+          "OCT": 8.98,
+          "NOV": 1.53,
+          "DEC": -4.14,
+          "ANN": 9.11
+        }
+      },
+      "terrain_data": {
+        "latitude": 43.164,
+        "longitude": -113.5,
+        "elevation_m": 1479.0,
+        "slope_degrees": 0.9,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Michigan, US",
+      "lat": 43.049,
+      "lon": -85.358,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 1.3457,
+          "FEB": 2.2457,
+          "MAR": 3.5906,
+          "APR": 4.6656,
+          "MAY": 5.5382,
+          "JUN": 6.2167,
+          "JUL": 6.2933,
+          "AUG": 5.3018,
+          "SEP": 4.1702,
+          "OCT": 2.5766,
+          "NOV": 1.5965,
+          "DEC": 1.081,
+          "ANN": 3.7246
+        },
+        "clearsky_irradiance": {
+          "JAN": 2.5872,
+          "FEB": 3.7999,
+          "MAR": 5.3381,
+          "APR": 6.835,
+          "MAY": 7.8269,
+          "JUN": 8.1538,
+          "JUL": 7.8216,
+          "AUG": 6.8155,
+          "SEP": 5.4972,
+          "OCT": 4.0068,
+          "NOV": 2.7238,
+          "DEC": 2.177,
+          "ANN": 5.3042
+        },
+        "temperature_2m": {
+          "JAN": -5.05,
+          "FEB": -4.44,
+          "MAR": 0.88,
+          "APR": 7.27,
+          "MAY": 13.68,
+          "JUN": 19.06,
+          "JUL": 21.82,
+          "AUG": 21.19,
+          "SEP": 17.44,
+          "OCT": 10.16,
+          "NOV": 3.7,
+          "DEC": -1.98,
+          "ANN": 8.71
+        }
+      },
+      "terrain_data": {
+        "latitude": 43.049,
+        "longitude": -85.358,
+        "elevation_m": 266.0,
+        "slope_degrees": 1.6,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Newfoundland, CA",
+      "lat": 48.372,
+      "lon": -55.146,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 1.0822,
+          "FEB": 1.915,
+          "MAR": 2.9784,
+          "APR": 4.0289,
+          "MAY": 4.7095,
+          "JUN": 4.9697,
+          "JUL": 5.1278,
+          "AUG": 4.3452,
+          "SEP": 3.3648,
+          "OCT": 2.1053,
+          "NOV": 1.1892,
+          "DEC": 0.798,
+          "ANN": 3.0559
+        },
+        "clearsky_irradiance": {
+          "JAN": 1.9718,
+          "FEB": 3.2261,
+          "MAR": 5.0266,
+          "APR": 6.7094,
+          "MAY": 7.8526,
+          "JUN": 8.256,
+          "JUL": 7.7172,
+          "AUG": 6.6214,
+          "SEP": 5.1386,
+          "OCT": 3.4994,
+          "NOV": 2.1413,
+          "DEC": 1.583,
+          "ANN": 4.9855
+        },
+        "temperature_2m": {
+          "JAN": -7.27,
+          "FEB": -7.13,
+          "MAR": -4.17,
+          "APR": 1.45,
+          "MAY": 6.58,
+          "JUN": 11.67,
+          "JUL": 16.56,
+          "AUG": 16.23,
+          "SEP": 11.9,
+          "OCT": 6.36,
+          "NOV": 1.19,
+          "DEC": -3.73,
+          "ANN": 4.19
+        }
+      },
+      "terrain_data": {
+        "latitude": 48.372,
+        "longitude": -55.146,
+        "elevation_m": 311.0,
+        "slope_degrees": 0.9,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Northern Ontaria, CA",
+      "lat": 55.894,
+      "lon": -86.907,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 0.9127,
+          "FEB": 2.0578,
+          "MAR": 3.7066,
+          "APR": 5.184,
+          "MAY": 5.1876,
+          "JUN": 5.6786,
+          "JUL": 5.2351,
+          "AUG": 4.05,
+          "SEP": 2.7012,
+          "OCT": 1.4942,
+          "NOV": 0.7111,
+          "DEC": 0.565,
+          "ANN": 3.1267
+        },
+        "clearsky_irradiance": {
+          "JAN": 1.1654,
+          "FEB": 2.4151,
+          "MAR": 4.3663,
+          "APR": 6.4061,
+          "MAY": 7.6502,
+          "JUN": 8.0789,
+          "JUL": 7.4868,
+          "AUG": 6.1512,
+          "SEP": 4.4146,
+          "OCT": 2.6515,
+          "NOV": 1.349,
+          "DEC": 0.8266,
+          "ANN": 4.4215
+        },
+        "temperature_2m": {
+          "JAN": -21.51,
+          "FEB": -21.29,
+          "MAR": -14.83,
+          "APR": -7.96,
+          "MAY": -1.44,
+          "JUN": 3.34,
+          "JUL": 7.52,
+          "AUG": 9.77,
+          "SEP": 7.37,
+          "OCT": 2.06,
+          "NOV": -5.77,
+          "DEC": -16.52,
+          "ANN": -4.86
+        }
+      },
+      "terrain_data": {
+        "latitude": 55.894,
+        "longitude": -86.907,
+        "elevation_m": 4.0,
+        "slope_degrees": 1.9,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Anchorage, US",
+      "lat": 61.165,
+      "lon": -150.041,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 0.2791,
+          "FEB": 0.9202,
+          "MAR": 2.5589,
+          "APR": 4.1369,
+          "MAY": 4.8245,
+          "JUN": 5.4031,
+          "JUL": 4.7472,
+          "AUG": 3.7085,
+          "SEP": 2.3494,
+          "OCT": 1.1174,
+          "NOV": 0.3948,
+          "DEC": 0.1332,
+          "ANN": 2.5543
+        },
+        "clearsky_irradiance": {
+          "JAN": 0.4656,
+          "FEB": 1.4947,
+          "MAR": 3.4478,
+          "APR": 5.6165,
+          "MAY": 7.2444,
+          "JUN": 8.0429,
+          "JUL": 7.3908,
+          "AUG": 5.8265,
+          "SEP": 3.8424,
+          "OCT": 1.9152,
+          "NOV": 0.6667,
+          "DEC": 0.2378,
+          "ANN": 3.8594
+        },
+        "temperature_2m": {
+          "JAN": -8.26,
+          "FEB": -6.54,
+          "MAR": -5.6,
+          "APR": 0.39,
+          "MAY": 6.45,
+          "JUN": 11.1,
+          "JUL": 13.54,
+          "AUG": 12.66,
+          "SEP": 8.31,
+          "OCT": 2.0,
+          "NOV": -5.25,
+          "DEC": -6.99,
+          "ANN": 1.86
+        }
+      },
+      "terrain_data": {
+        "latitude": 61.165,
+        "longitude": -150.041,
+        "elevation_m": 61.411006927490234,
+        "slope_degrees": 8.0,
+        "aspect": null,
+        "dataset": "COP30 (30m resolution)"
+      }
+    },
+    "expected_verdict": "BAD"
+  },
+  {
+    "location": {
+      "name": "Fukoka, JP",
+      "lat": 33.47,
+      "lon": 130.582,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 2.1797,
+          "FEB": 2.9023,
+          "MAR": 3.9701,
+          "APR": 4.8427,
+          "MAY": 5.2351,
+          "JUN": 4.5415,
+          "JUL": 4.7453,
+          "AUG": 5.0683,
+          "SEP": 4.128,
+          "OCT": 3.5508,
+          "NOV": 2.6278,
+          "DEC": 2.0357,
+          "ANN": 3.8234
+        },
+        "clearsky_irradiance": {
+          "JAN": 3.5933,
+          "FEB": 4.5218,
+          "MAR": 5.7756,
+          "APR": 6.8779,
+          "MAY": 7.5317,
+          "JUN": 7.6154,
+          "JUL": 7.4558,
+          "AUG": 6.9847,
+          "SEP": 6.0818,
+          "OCT": 4.9207,
+          "NOV": 3.7927,
+          "DEC": 3.2822,
+          "ANN": 5.7074
+        },
+        "temperature_2m": {
+          "JAN": 3.84,
+          "FEB": 5.2,
+          "MAR": 8.14,
+          "APR": 13.06,
+          "MAY": 17.91,
+          "JUN": 21.74,
+          "JUL": 25.63,
+          "AUG": 26.35,
+          "SEP": 22.57,
+          "OCT": 16.95,
+          "NOV": 11.48,
+          "DEC": 5.98,
+          "ANN": 14.95
+        }
+      },
+      "terrain_data": {
+        "latitude": 33.47,
+        "longitude": 130.582,
+        "elevation_m": 34.0,
+        "slope_degrees": 1.4,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Northern Philippines",
+      "lat": 18.505,
+      "lon": 122.164,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 3.2818,
+          "FEB": 4.1734,
+          "MAR": 4.9733,
+          "APR": 6.0355,
+          "MAY": 6.2398,
+          "JUN": 6.2563,
+          "JUL": 5.6935,
+          "AUG": 5.237,
+          "SEP": 5.0729,
+          "OCT": 4.4006,
+          "NOV": 3.563,
+          "DEC": 2.8421,
+          "ANN": 4.8142
+        },
+        "clearsky_irradiance": {
+          "JAN": 5.2171,
+          "FEB": 5.9794,
+          "MAR": 6.6497,
+          "APR": 7.1762,
+          "MAY": 7.4184,
+          "JUN": 7.4784,
+          "JUL": 7.4357,
+          "AUG": 7.2144,
+          "SEP": 6.8244,
+          "OCT": 6.1483,
+          "NOV": 5.3669,
+          "DEC": 4.9207,
+          "ANN": 6.4872
+        },
+        "temperature_2m": {
+          "JAN": 24.15,
+          "FEB": 24.53,
+          "MAR": 25.6,
+          "APR": 27.5,
+          "MAY": 28.67,
+          "JUN": 28.95,
+          "JUL": 28.57,
+          "AUG": 28.31,
+          "SEP": 28.08,
+          "OCT": 27.32,
+          "NOV": 26.43,
+          "DEC": 24.96,
+          "ANN": 26.93
+        }
+      },
+      "terrain_data": {
+        "latitude": 18.505,
+        "longitude": 122.164,
+        "elevation_m": 3.0,
+        "slope_degrees": 1.3,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Fiji",
+      "lat": -17.983,
+      "lon": 178.447,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 5.8848,
+          "FEB": 5.6117,
+          "MAR": 5.1322,
+          "APR": 4.4664,
+          "MAY": 3.9874,
+          "JUN": 3.5508,
+          "JUL": 3.8014,
+          "AUG": 4.2377,
+          "SEP": 4.9133,
+          "OCT": 5.4408,
+          "NOV": 5.7703,
+          "DEC": 5.7737,
+          "ANN": 4.8775
+        },
+        "clearsky_irradiance": {
+          "JAN": 8.1658,
+          "FEB": 7.8468,
+          "MAR": 7.1844,
+          "APR": 6.239,
+          "MAY": 5.3803,
+          "JUN": 4.9154,
+          "JUL": 5.1518,
+          "AUG": 5.8939,
+          "SEP": 6.8131,
+          "OCT": 7.5912,
+          "NOV": 8.0378,
+          "DEC": 8.1816,
+          "ANN": 6.7786
+        },
+        "temperature_2m": {
+          "JAN": 27.42,
+          "FEB": 27.78,
+          "MAR": 27.58,
+          "APR": 27.02,
+          "MAY": 25.94,
+          "JUN": 25.13,
+          "JUL": 24.21,
+          "AUG": 24.01,
+          "SEP": 24.4,
+          "OCT": 25.04,
+          "NOV": 25.79,
+          "DEC": 26.66,
+          "ANN": 25.9
+        }
+      },
+      "terrain_data": {
+        "latitude": -17.983,
+        "longitude": 178.447,
+        "elevation_m": 42.0,
+        "slope_degrees": 8.0,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Central DRC",
+      "lat": -4.829,
+      "lon": 24.408,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 4.6193,
+          "FEB": 4.9164,
+          "MAR": 5.1619,
+          "APR": 5.0976,
+          "MAY": 5.07,
+          "JUN": 4.8118,
+          "JUL": 4.5336,
+          "AUG": 4.3627,
+          "SEP": 4.9046,
+          "OCT": 4.9548,
+          "NOV": 4.9058,
+          "DEC": 4.6054,
+          "ANN": 4.8269
+        },
+        "clearsky_irradiance": {
+          "JAN": 6.9526,
+          "FEB": 7.2029,
+          "MAR": 7.2509,
+          "APR": 6.9108,
+          "MAY": 6.2028,
+          "JUN": 5.5397,
+          "JUL": 5.3681,
+          "AUG": 5.5178,
+          "SEP": 6.2664,
+          "OCT": 6.9283,
+          "NOV": 7.1443,
+          "DEC": 7.0075,
+          "ANN": 6.5198
+        },
+        "temperature_2m": {
+          "JAN": 24.64,
+          "FEB": 25.11,
+          "MAR": 24.95,
+          "APR": 24.8,
+          "MAY": 25.28,
+          "JUN": 25.67,
+          "JUL": 26.41,
+          "AUG": 27.18,
+          "SEP": 26.26,
+          "OCT": 24.94,
+          "NOV": 24.37,
+          "DEC": 24.28,
+          "ANN": 25.33
+        }
+      },
+      "terrain_data": {
+        "latitude": -4.829,
+        "longitude": 24.408,
+        "elevation_m": 621.0,
+        "slope_degrees": 0.9,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Vietnam",
+      "lat": 21.267,
+      "lon": 105.38,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 2.2387,
+          "FEB": 2.652,
+          "MAR": 2.9724,
+          "APR": 3.7634,
+          "MAY": 4.7364,
+          "JUN": 4.9534,
+          "JUL": 4.8262,
+          "AUG": 4.6807,
+          "SEP": 4.5019,
+          "OCT": 3.7618,
+          "NOV": 3.2357,
+          "DEC": 2.5394,
+          "ANN": 3.7426
+        },
+        "clearsky_irradiance": {
+          "JAN": 4.5468,
+          "FEB": 5.1679,
+          "MAR": 5.5457,
+          "APR": 6.3739,
+          "MAY": 7.1378,
+          "JUN": 7.2634,
+          "JUL": 7.3051,
+          "AUG": 7.0102,
+          "SEP": 6.4104,
+          "OCT": 5.3906,
+          "NOV": 4.7753,
+          "DEC": 4.2226,
+          "ANN": 5.9318
+        },
+        "temperature_2m": {
+          "JAN": 15.04,
+          "FEB": 17.91,
+          "MAR": 21.19,
+          "APR": 24.98,
+          "MAY": 27.27,
+          "JUN": 28.19,
+          "JUL": 28.15,
+          "AUG": 27.85,
+          "SEP": 26.59,
+          "OCT": 23.61,
+          "NOV": 20.03,
+          "DEC": 15.65,
+          "ANN": 23.06
+        }
+      },
+      "terrain_data": {
+        "latitude": 21.267,
+        "longitude": 105.38,
+        "elevation_m": 13.0,
+        "slope_degrees": 1.4,
+        "aspect": null,
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
+  },
+  {
+    "location": {
+      "name": "Lima, Peru",
+      "lat": -12.117,
+      "lon": -76.847,
+      "climate_data": {
+        "allsky_irradiance": {
+          "JAN": 5.8978,
+          "FEB": 5.6645,
+          "MAR": 5.6141,
+          "APR": 5.7031,
+          "MAY": 5.2363,
+          "JUN": 4.5029,
+          "JUL": 4.6022,
+          "AUG": 5.1005,
+          "SEP": 5.7233,
+          "OCT": 6.3948,
+          "NOV": 6.5786,
+          "DEC": 6.0374,
+          "ANN": 5.587
+        },
+        "clearsky_irradiance": {
+          "JAN": 8.213,
+          "FEB": 7.991,
+          "MAR": 7.5348,
+          "APR": 6.882,
+          "MAY": 6.2554,
+          "JUN": 5.8618,
+          "JUL": 6.0689,
+          "AUG": 6.6751,
+          "SEP": 7.3733,
+          "OCT": 8.0292,
+          "NOV": 8.3256,
+          "DEC": 8.215,
+          "ANN": 7.2821
+        },
+        "temperature_2m": {
+          "JAN": 19.41,
+          "FEB": 20.04,
+          "MAR": 20.07,
+          "APR": 19.3,
+          "MAY": 18.13,
+          "JUN": 17.17,
+          "JUL": 16.71,
+          "AUG": 16.94,
+          "SEP": 17.34,
+          "OCT": 17.45,
+          "NOV": 17.8,
+          "DEC": 18.48,
+          "ANN": 18.23
+        }
+      },
+      "terrain_data": {
+        "latitude": -12.117,
+        "longitude": -76.847,
+        "elevation_m": 762.0,
+        "slope_degrees": 13.8,
+        "aspect": "NW",
+        "dataset": "SRTM GL1 (30m resolution)"
+      }
+    },
+    "expected_verdict": "MARGINAL"
   }
 ]
