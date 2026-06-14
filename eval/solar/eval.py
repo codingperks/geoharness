@@ -77,7 +77,11 @@ def evaluate_case(tc: EvalTestCase, mcp_uri: str | None = None) -> EvalResult:
     f"Is {tc.location.name} ({tc.location.lat}, {tc.location.lon}) a good location "
     f"for ground-mounted solar panels? Use the available tools to assess the location. "
     f"Base your verdict solely on the data the tools return — do not factor in general "
-    f"knowledge about the location, land use, or regulations."
+    f"knowledge about the location, land use, or regulations. "
+    f"When the data presents multiple factors (e.g. solar irradiance, cloud cover, slope, "
+    f"aspect, temperature), the overall verdict should be driven by the weakest factor, not "
+    f"an average — a site with strong irradiance but a problematic slope or aspect should "
+    f"not be rated GOOD overall. "
     f"Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return."
 )
 
@@ -118,7 +122,7 @@ def evaluate(use_mcp: bool = False):
         mcp_uri = MCP_URI
 
     try:
-        with ThreadPoolExecutor(max_workers=2) as executor:
+        with ThreadPoolExecutor(max_workers=1) as executor:
             futures = {executor.submit(evaluate_case, tc, mcp_uri): tc for tc in test_cases}
             for future in as_completed(futures):
                 results.append(future.result())
@@ -129,7 +133,10 @@ def evaluate(use_mcp: bool = False):
     print("Fetching trace steps from Langfuse...")
     for r in results:
         if r.trace_id:
-            r.steps = fetch_trace_steps(r.trace_id)
+            try:
+                r.steps = fetch_trace_steps(r.trace_id)
+            except Exception as e:
+                print(f"  Warning: failed to fetch trace steps for {r.test_case.location.name}: {e}")
 
     passed = sum(r.passed for r in results)
     print(f"\n{'═' * 60}")
@@ -159,6 +166,7 @@ def evaluate(use_mcp: bool = False):
                     "mcp": use_mcp,
                     "trace_id": r.trace_id,
                     "steps": r.steps,
+                    "mode": "react",
                 }
                 for r in results
             ],

@@ -109,3 +109,5 @@ A location's overall label is determined by its worst individual score across ir
 - Any BAD → BAD
 
 This is conservative by design — a location with excellent irradiance but a north-facing slope should not be labelled GOOD.
+
+**Note:** This worst-factor-wins principle is also given to the agent as methodology guidance in the eval task prompt (`eval.py`), without disclosing the specific numeric thresholds above. Added after the 45-location run showed the agent averaging factors instead of capping on the weakest one.
