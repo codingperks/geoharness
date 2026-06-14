@@ -8,7 +8,7 @@ West Bengal, India: 21.912, 88.468
 South Australia: -38.424, 142.859
 South NZ: -46.205, 167.21
 North NZ: -35.684, 174.158
-Antarctic Coast (might not have data for this): -69.365, 30.579
+Antarctic Coast: -69.365, 30.579
 Southern Greenland: 61.192, -46.943
 South Icleand: 63.506, -18.104
 North Iceland: 66.0190, -18.858
@@ -24,8 +24,8 @@ Uruguay: -33.125, -55.816
 Portland, US: 45.022, -122.893
 Idaho Craters, US: 43.164, -113.500
 Michigan, US: 43.049, -85.358
-Newfoundland, CA: 48.372, -55.146
-Northern Ontaria, CA: 55.894, -86.907
+Newfoundland, Canada: 48.372, -55.146
+Northern Ontaria, Canada: 55.894, -86.907
 Anchorage, US: 61.165, -150.041
 Fukoka, JP: 33.47, 130.582
 Northern Philippines: 18.505, 122.164

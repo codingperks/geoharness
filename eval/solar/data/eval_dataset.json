@@ -1261,7 +1261,7 @@
   },
   {
     "location": {
-      "name": "Antarctic Coast (might not have data for this)",
+      "name": "Antarctic Coast",
       "lat": -69.365,
       "lon": 30.579,
       "climate_data": {
@@ -2269,7 +2269,7 @@
   },
   {
     "location": {
-      "name": "Newfoundland, CA",
+      "name": "Newfoundland, Canada",
       "lat": 48.372,
       "lon": -55.146,
       "climate_data": {
@@ -2332,7 +2332,7 @@
   },
   {
     "location": {
-      "name": "Northern Ontaria, CA",
+      "name": "Northern Ontaria, Canada",
       "lat": 55.894,
       "lon": -86.907,
       "climate_data": {

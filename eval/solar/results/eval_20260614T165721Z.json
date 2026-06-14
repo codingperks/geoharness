@@ -340,11 +340,11 @@
     "steps": []
   },
   {
-    "name": "Antarctic Coast (might not have data for this)",
+    "name": "Antarctic Coast",
     "expected": "MARGINAL",
     "actual": "BAD",
     "passed": false,
-    "prompt": "Is Antarctic Coast (might not have data for this) (-69.365, 30.579) a good location for ground-mounted solar panels? Use the available tools to assess the location. Base your verdict solely on the data the tools return \u2014 do not factor in general knowledge about the location, land use, or regulations.Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return.",
+    "prompt": "Is Antarctic Coast (-69.365, 30.579) a good location for ground-mounted solar panels? Use the available tools to assess the location. Base your verdict solely on the data the tools return \u2014 do not factor in general knowledge about the location, land use, or regulations.Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return.",
     "model": null,
     "iterations": 2,
     "tool_error": false,
@@ -612,11 +612,11 @@
     "steps": []
   },
   {
-    "name": "Newfoundland, CA",
+    "name": "Newfoundland, Canada",
     "expected": "MARGINAL",
     "actual": "MARGINAL",
     "passed": true,
-    "prompt": "Is Newfoundland, CA (48.372, -55.146) a good location for ground-mounted solar panels? Use the available tools to assess the location. Base your verdict solely on the data the tools return \u2014 do not factor in general knowledge about the location, land use, or regulations.Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return.",
+    "prompt": "Is Newfoundland, Canada (48.372, -55.146) a good location for ground-mounted solar panels? Use the available tools to assess the location. Base your verdict solely on the data the tools return \u2014 do not factor in general knowledge about the location, land use, or regulations.Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return.",
     "model": null,
     "iterations": 2,
     "tool_error": false,
@@ -629,11 +629,11 @@
     "steps": []
   },
   {
-    "name": "Northern Ontaria, CA",
+    "name": "Northern Ontaria, Canada",
     "expected": "MARGINAL",
     "actual": "BAD",
     "passed": false,
-    "prompt": "Is Northern Ontaria, CA (55.894, -86.907) a good location for ground-mounted solar panels? Use the available tools to assess the location. Base your verdict solely on the data the tools return \u2014 do not factor in general knowledge about the location, land use, or regulations.Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return.",
+    "prompt": "Is Northern Ontaria, Canada (55.894, -86.907) a good location for ground-mounted solar panels? Use the available tools to assess the location. Base your verdict solely on the data the tools return \u2014 do not factor in general knowledge about the location, land use, or regulations.Assess and give a verdict of GOOD, MARGINAL, or BAD based on the data the tools return.",
     "model": null,
     "iterations": 2,
     "tool_error": false,
