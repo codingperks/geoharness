@@ -48,12 +48,65 @@ const LOCATION_META = {
 async function init() {
   const results = await fetch('./data/eval_results.json').then(r => r.json())
   const list = document.getElementById('location-list')
+
+  document.getElementById('summary-bar').appendChild(renderSummary(results))
+  document.getElementById('filter-bar').appendChild(renderFilters(results, list))
+
   results.forEach(result => list.appendChild(createCard(result)))
+}
+
+function renderSummary(results) {
+  const passed = results.filter(r => r.passed).length
+  const pct = Math.round((passed / results.length) * 100)
+
+  const el = document.createElement('div')
+  el.className = 'summary'
+  el.innerHTML = `
+    <span class="summary-score">${passed}/${results.length} passed (${pct}%)</span>
+  `
+  return el
+}
+
+function renderFilters(results, list) {
+  const counts = {
+    all: results.length,
+    pass: results.filter(r => r.passed).length,
+    fail: results.filter(r => !r.passed).length,
+  }
+
+  const el = document.createElement('div')
+  el.className = 'filters'
+
+  const buttons = [
+    ['all', `All (${counts.all})`],
+    ['pass', `Pass (${counts.pass})`],
+    ['fail', `Fail (${counts.fail})`],
+  ]
+
+  buttons.forEach(([key, label], i) => {
+    const btn = document.createElement('button')
+    btn.className = 'filter-btn'
+    btn.textContent = label
+    btn.dataset.filter = key
+    if (i === 0) btn.classList.add('active')
+    btn.addEventListener('click', () => {
+      el.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      list.querySelectorAll('.card').forEach(card => {
+        const show = key === 'all' || card.dataset.result === key
+        card.hidden = !show
+      })
+    })
+    el.appendChild(btn)
+  })
+
+  return el
 }
 
 function createCard(result) {
   const card = document.createElement('div')
   card.className = 'card'
+  card.dataset.result = result.passed ? 'pass' : 'fail'
 
   const header = document.createElement('button')
   header.className = 'card-header'

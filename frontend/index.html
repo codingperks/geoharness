@@ -24,11 +24,14 @@
         This project tests the alternative: a single ReAct loop (<code>act → observe → reflect</code>) with just two primitive geospatial tools, asking whether a simple agent can reason correctly about complex data without heavy scaffolding.
       </p>
       <p>
-        The eval below runs the agent against 11 hand-labelled locations spanning three verdicts — GOOD, MARGINAL, BAD — using only NASA POWER climate data and OpenTopography terrain data. Web search is excluded so the agent must reason from tool data alone, not training knowledge. Current score: <strong>10/11 (91%)</strong>.
+        The eval below runs the agent against 45 hand-labelled locations spanning three verdicts — GOOD, MARGINAL, BAD — using only NASA POWER climate data and OpenTopography terrain data. Web search is excluded so the agent must reason from tool data alone, not training knowledge.
       </p>
     </section>
 
+    <div id="summary-bar"></div>
+
     <h2 class="section-title">Eval results</h2>
+    <div id="filter-bar"></div>
     <div id="location-list"></div>
   </main>
 

@@ -68,6 +68,48 @@ main {
   font-size: 0.85em;
 }
 
+/* ── Summary ── */
+.summary {
+  background: #fff;
+  border: 1px solid #e7e5e4;
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.summary-score {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* ── Filters ── */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.filter-btn {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #57534e;
+  background: #fff;
+  border: 1px solid #e7e5e4;
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  cursor: pointer;
+}
+
+.filter-btn:hover { background: #fafaf9; }
+
+.filter-btn.active {
+  background: #1c1917;
+  color: #fff;
+  border-color: #1c1917;
+}
+
 .section-title {
   font-size: 0.8rem;
   font-weight: 600;
