@@ -66,15 +66,15 @@ To use with Claude Code, add the following to `.claude/settings.json` in the pro
 
 Once configured, the server will start automatically when you open the project. You can then ask Claude Code directly: *"Is Seville a good location for solar panels?"* and it will call the tools natively.
 
-**MCP eval finding:** running the 11-location eval via the MCP path (tools called through the protocol rather than directly) produced the same 10/11 score with the same failure. This confirms the quality is in the tool data, not the custom ReAct prompt tuning.
+**MCP eval finding:** running the (then 11-location) eval via the MCP path (tools called through the protocol rather than directly) produced the same score with the same failures as the direct tool path. This confirms the quality is in the tool data, not the custom ReAct prompt tuning.
 
 ## Eval
 
-A hand-labelled eval set of 11 locations tests whether the agent reaches the correct GOOD / MARGINAL / BAD verdict from raw geospatial data alone. Current score: **10/11 (91%)**.
+A hand-labelled eval set of 45 locations tests whether the agent reaches the correct GOOD / MARGINAL / BAD verdict from raw geospatial data alone. Current score: **35/45 (78%)**.
 
-Scoring rules are documented in [`eval/solar/eval_rules.md`](eval/solar/eval_rules.md). Locations cover a spread of latitudes, hemispheres, and failure modes (low irradiance, high cloud cover, bad aspect, steep slope). `web_search` is excluded — the agent must reason from tool data alone, not training knowledge.
+Scoring rules are documented in [`eval/solar/eval_rules.md`](eval/solar/eval_rules.md). The set spans latitudes, hemispheres, and failure modes (low irradiance, high cloud cover, bad aspect, steep slope, extreme temperature). Ground-truth labels are derived mechanically from the scoring rules against raw tool data — no model or human judgement is involved in labelling, so the eval can't be biased by training data. `web_search` is excluded — the agent must reason from tool data alone, not training knowledge.
 
-The one remaining failure (Croatian Coast, 4.3 kWh/m²/day) is a legitimate borderline case. The eval rules are intentionally not softened to match the agent output.
+The dominant remaining failure mode is calibration rather than process: the agent's sense of what counts as a "good" irradiance, slope, or temperature value doesn't always match the rubric's thresholds. 
 
 ```bash
 # standard eval
@@ -85,6 +85,18 @@ uv run eval/solar/eval.py --mcp
 ```
 
 Results are saved to `eval/solar/results/` with a UTC timestamp per run and include the full Langfuse trace ID for each case.
+
+## Architectural baseline
+
+To test whether the ReAct loop (`act → observe → reflect`) is actually earning its keep, [`eval/solar/eval_baseline.py`](eval/solar/eval_baseline.py) runs the same 45 locations through a single LLM call: climate and terrain data are pre-fetched and embedded directly in one prompt, with the same task framing and output schema as the ReAct eval — no tools, no loop.
+
+**Baseline score: 32/45 (71%)** vs. ReAct's **35/45 (78%)**.
+
+ReAct comes out ahead, but not by a clean sweep — 9 of the 45 locations flip outcome between the two modes (6 in ReAct's favour, 3 against), and 7 locations fail in *both* modes. The shared failures point to a calibration ceiling that the extra reasoning steps don't address; the loop mostly reshuffles which cases it gets right rather than uniformly improving on the baseline.
+
+```bash
+uv run eval/solar/eval_baseline.py
+```
 
 ## Running locally
 
