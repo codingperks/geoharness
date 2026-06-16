@@ -26,8 +26,9 @@ def _disk_cache(fn):
             with open(cache_path) as f:
                 return ToolResponse(output=f.read())
         result = fn(*args, **kwargs)
-        with open(cache_path, "w") as f:
-            f.write(result.output)
+        if not result.output.startswith("Failed to retrieve"):
+            with open(cache_path, "w") as f:
+                f.write(result.output)
         return result
     return wrapper
 
